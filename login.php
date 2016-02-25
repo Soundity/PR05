@@ -51,8 +51,8 @@
   					</div> -->
 				</div>
 	 		 </div>
-	 		 <i class="sign in large icon"></i><input type="submit" class="ui inverted orange button" value="Login"/>
-	 		 <input type="button" class="ui inverted orange button" onclick="location='registro.php'" value="Registrate"/><i class="edit large icon"></i>
+	 		 <!-- <i class="sign in large icon"></i> --><input type="submit" class="ui inverted orange button" value="Login"/>
+	 		 <input type="button" class="ui inverted orange button" onclick="location='registro.php'" value="Registrate"/><!-- <i class="edit large icon"></i> -->
 	 		<!--<button class="ui inverted orange button">Login</button>
 	 		<button class="ui inverted orange button">Registrate</button>-->
 		</div>

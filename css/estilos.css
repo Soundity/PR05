@@ -131,3 +131,9 @@ i.inverted.bordered.icon, i.inverted.circular.icon{
 .ui[class*="right floated"].segment{
 	margin-left: 70%;
 }
+.general, #general{
+	width: 100%;
+	height: 20%;
+	margin-top: 10%;
+	background-color: #000;
+}
