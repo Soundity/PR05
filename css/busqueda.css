@@ -1,0 +1,18 @@
+
+.ui.grid{
+	margin-top: 3%;
+	width: 70%;
+	margin-left: 15%;
+}
+.ui.raised.segment, .ui.raised.segments´{
+	margin-top: 10%;
+}
+.ui.button>.icon{
+	color: #fff;
+}
+.ui.orange.segment:not(.inverted){
+	border-top: 2px solid #FBB03B;
+}
+.ui.orange.button, .ui.orange.buttons .button{
+	background-color: #FBB03B;
+}

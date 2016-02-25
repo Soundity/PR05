@@ -1,0 +1,52 @@
+
+body{
+	background-color: rgba(0, 0, 0, 0.58);
+	top: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+.ui.header{
+	color: #000;
+}
+
+.ui.inverted.orange.button:hover, .ui.inverted.orange.buttons .button:hover{
+	background-color: #FBB03B;
+}
+
+.ui.orange.segment:not(.inverted){
+	top: 40%;
+	left: 35%;
+	position: absolute;
+	padding: 1%;
+	width: 25%;
+	background-color: #fff;
+	border-top: 5px solid #FBB03B;
+}
+
+.ui.corner.label .icon{
+	color: red;
+}
+
+#icon{
+	margin-left: 47%;
+	margin-top: 30.6%;
+	position: fixed;
+}
+.ui.inverted.orange.button, .ui.inverted.orange.buttons .button {
+	background-color: transparent;
+	box-shadow: 0 0 0 2px #ff851b inset!important;
+	margin-left: -45%;
+}
+@media screen and (max-width:1920px ) {
+	#icon{
+		margin-left: 48%;
+		margin-top: 28.4%;
+		position: fixed
+	}
+	.ui.inverted.orange.button, .ui.inverted.orange.buttons .button {
+	background-color: transparent;
+	box-shadow: 0 0 0 2px #ff851b inset!important;
+	margin-left: -30%;
+}
+}
