@@ -1,0 +1,44 @@
+#contenido{
+	/*background: green;*/
+	margin: 0 5% 0 5%;
+	height: 600px;
+}
+
+#generos{
+	/*background:blue;*/
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.elemento_genero{
+	position: center;
+	background: gray;
+	margin: 1%;
+	display: inline-flex;
+	width: 15em;
+	height: 13em;
+	text-align: center;
+	background-image: url(../media/images/logo.png);
+	background-size: 10em 10em;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.elemento_genero:hover{
+	background: #EAA42C;
+}
+
+.elemento_genero p{
+	text-align: center;
+}
+
+.cancion{
+	background: gray;
+	display: block;
+	padding: 1%;
+	margin-top: 1%;
+}
+
+audio{
+	margin-top: 2%;
+}
