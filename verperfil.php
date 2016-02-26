@@ -17,20 +17,30 @@ include('conexion.php');
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="css/generos.css">
         <link rel="stylesheet" type="text/css" href="css/styleRep1.css">
+        <link rel="stylesheet" type="text/css" href="css/busqueda.css">
         <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
         <script type="text/javascript" src="js/botonesReproductor1.js"></script>
         </head>
             <body>
-            
+            <div class="ui grid">
                 <?php
                 $contador=0;
                 
                 while($perfil = mysqli_fetch_array($datos)) {
-                    
+                    echo "<div class='seven wide centered column'>";
+          echo "<div class='ui orange raised segment'>";
+          echo "<div class='ui horizontal divider'>";
+          echo utf8_encode("<h2>".$perfil['usu_nom']."</h2></div>");
+
                   if ($contador==0){
-                
-                    echo utf8_encode($perfil['usu_nom']);
+                            if(!empty($perfil['usu_avatar'])){
+                              $fichero="media/images/avatares/$perfil[usu_avatar]";
+                              echo"</br><img  class='ui small center left circular floated image' src='$fichero'>";
+                             }else{
+                              echo"</br><img  src=media/images/avatares/usuario.jpeg>";
+                             }
+                    
                     echo "</br>";
                     echo utf8_encode($perfil['usu_descripcio']);
 
@@ -72,7 +82,7 @@ include('conexion.php');
           <article class="cancion" data-source="media/music/<?php echo $perfil['mus_nom'] ?>">
 
             <p><?php 
-            echo "Nombre: ".$perfil['mus_titol']."   |   Autor: ".$perfil['usu_nom']; ?></p>
+            echo $perfil['mus_titol']."   |   ".$perfil['usu_nom']; ?></p>
           </article>
           
 <?php
@@ -80,7 +90,7 @@ include('conexion.php');
            
                 ?>
 
-              
+              </div>
             </body>
         </html>
 
@@ -105,16 +115,25 @@ include('conexion.php');
         <script type="text/javascript" src="js/botonesReproductor1.js"></script>
         </head>
             <body>
-           
+           <div class="ui grid">
                 <?php
                 $contador=0;
                 
                 while($perfil = mysqli_fetch_array($datos)) {
                   
+                  echo "<div class='seven wide centered column'>";
+                  echo "<div class='ui orange raised segment'>";
+                  echo "<div class='ui horizontal divider'>";
+                  echo utf8_encode("<h2>".$perfil['usu_nom']."</h2></div>");
                   if ($contador==0){
              
-
-                    echo utf8_encode($perfil['usu_nom']);
+                    if(!empty($perfil['usu_avatar'])){
+          $fichero="media/images/avatares/$perfil[usu_avatar]";
+          echo"</br><img  src='$fichero'>";
+        }else{
+          echo"</br><img  src=media/images/avatares/usuario.jpeg>";
+        }
+                   
                     echo "</br>";
                     echo utf8_encode($perfil['usu_descripcio']);
 
@@ -164,7 +183,7 @@ include('conexion.php');
                  
                 ?>
 
-              
+              </div>
             </body>
         </html>
 
