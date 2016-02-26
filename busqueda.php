@@ -28,7 +28,7 @@ include('conexion.php');
 				echo "</div>";
 			}else{
 				while($pro0 = mysqli_fetch_array($datos0)) {
-					echo "<div class='twelve wide centered column'>";
+					echo "<div class='seven wide centered column'>";
 					echo "<div class='ui orange raised segment'>";
 					echo "<div class='ui horizontal divider'>";
 					echo utf8_encode("<h2>$pro0[usu_nom]</h2>");
