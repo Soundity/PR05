@@ -17,13 +17,15 @@ include('header_menu.html');
 	</head>
 
 	<body>
-		<div id="sliderFrame">
-			<div id="slider">
-				<img src="media/images/image-slider-1.jpg" alt="Top 1" />
-				<img src="media/images/image-slider-2.jpg" alt="Top 2" />
-				<img src="media/images/image-slider-3.jpg" alt="Top 3" />
-				<img src="media/images/image-slider-4.jpg" alt="Top 4" />
-				<img src="media/images/image-slider-5.jpg" alt="Top 5"/>
+		<div class="general">
+			<div id="sliderFrame">
+				<div id="slider">
+					<img src="media/images/Slider/JPG/slider1.jpg" alt="Top 1" />
+					<img src="media/images/Slider/JPG/slider2.jpg" alt="Top 2" />
+					<img src="media/images/Slider/JPG/slider3.jpg" alt="Top 3" />
+					<img src="media/images/Slider/JPG/slider4.jpg" alt="Top 4" />
+					<img src="media/images/Slider/JPG/slider5.jpg" alt="Top 5"/>
+				</div>
 			</div>
 		</div>
     </div>
