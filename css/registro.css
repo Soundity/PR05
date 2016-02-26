@@ -24,7 +24,9 @@ body{
 	opacity: 0.92;
 	border-top: 5px solid #FBB03B;
 }
-
+.error{
+	color: #FF0000;
+}
 .ui.corner.label .icon{
 	color: red;
 }

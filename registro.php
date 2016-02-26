@@ -26,27 +26,27 @@
 					<label>Correo Electrónico: </label>
 					<div class="five wide field">
 						<input id="correo" name="correo" class="element text medium" type="text" maxlength="50" size="30" value=""/>
-						<span id="error_correo_vacio"></span>
-						<span id="error_correo_formato"></span>
+						<span id="error_correo_vacio" class="error"></span>
+						<span id="error_correo_formato" class="error"></span>
 					</div>
 					<!-- CONTRASEÑA DEL USUARIO -->
 					<label>Contraseña:</label>
 					<div class="five wide field">
 						<input id="contrasena" name="contrasena" type="password" value=""/>
-						<span id="error_contrasena_vacio"></span>
+						<span id="error_contrasena_vacio" class="error"></span>
 					</div>
 					<!-- CONFIRMACIÓN DEL USUARIO -->
 					<label>Confirmar contraseña:</label>
 					<div class="five wide field">
 	    				<input id="confirmar_contrasena" type="password" />
-	    				<span id="error_confirmar_contrasena_vacio"></span>
-	    				<span id="error_confirmar_contrasena_incorrecto"></span>
+	    				<span id="error_confirmar_contrasena_vacio" class="error"></span>
+	    				<span id="error_confirmar_contrasena_incorrecto" class="error"></span>
 					</div>
 					<!-- APODO O NICKNAME DEL USUARIO -->
 					<label>Apodo / Nickname: </label>
 					<div class="five wide field">
 						<input id="apodo" name="apodo"  maxlength="30" size="30" value=""/>
-						<span id="error_apodo"></span>
+						<span id="error_apodo" class="error"></span>
 					</div>
 					<!-- CHECKBOX DE GUSTOS -->
 					<label>Selecciona tus gustos: </label>
