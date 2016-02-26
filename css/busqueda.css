@@ -1,4 +1,9 @@
 
+body{
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
 .ui.grid{
 	margin-top: 3%;
 	width: 70%;
@@ -12,7 +17,21 @@
 }
 .ui.orange.segment:not(.inverted){
 	border-top: 2px solid #FBB03B;
+	margin-top: 5%;
 }
 .ui.orange.button, .ui.orange.buttons .button{
 	background-color: #FBB03B;
+}
+.ui.label:last-child{
+	background-color: transparent;
+}
+.ui.orange.segment:not(.inverted){
+	height: 32%;
+}
+.flotante{
+	margin-left: 1%;
+	float: left;
+}
+.no_result{
+	height: 0;
 }

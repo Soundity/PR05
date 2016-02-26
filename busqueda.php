@@ -6,7 +6,6 @@ include('conexion.php');
 	$datos0 = mysqli_query($con, $sql0);
 	$sql1 = "SELECT * FROM tbl_musica INNER JOIN tbl_genere ON tbl_musica.gen_id=tbl_genere.gen_id INNER JOIN tbl_usuari on tbl_musica.usu_id = tbl_usuari.usu_id WHERE mus_titol LIKE'%$_REQUEST[buscar]%'";
 	$datos1 = mysqli_query($con, $sql1);
-include('header_menu.html');
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,8 +19,8 @@ include('header_menu.html');
 		<div class="ui grid">
 			<?php
 			if(mysqli_num_rows($datos0)<=0){
-				echo "<div class='ui orange raised segment'>";
-				echo "<div class='two wide column'>";
+				echo "<div class='nine wide centered column'>";
+				echo "<div class='no_result'>";
 				echo "<div class='ui horizontal divider'>";
 				echo "No hay resultados de Autores";
 				echo "</div>";
@@ -29,8 +28,8 @@ include('header_menu.html');
 				echo "</div>";
 			}else{
 				while($pro0 = mysqli_fetch_array($datos0)) {
+					echo "<div class='twelve wide centered column'>";
 					echo "<div class='ui orange raised segment'>";
-					echo "<div class='two wide column'>";
 					echo "<div class='ui horizontal divider'>";
 					echo utf8_encode("<h2>$pro0[usu_nom]</h2>");
 					echo "</div>";
@@ -48,8 +47,8 @@ include('header_menu.html');
 		<div class="ui grid">
 			<?php
 				if(mysqli_num_rows($datos1)<=0){
-					echo "<div class='ui orange raised segment'>";
-					echo "<div class='two wide column'>";
+					echo "<div class='nine wide centered column'>";
+					echo "<div class='no_result'>";
 					echo "<div class='ui horizontal divider'>";
 					echo "No hay resultados de Música";
 					echo "</div>";
@@ -58,17 +57,19 @@ include('header_menu.html');
 						
 				}else{
 					while($pro1 = mysqli_fetch_array($datos1)) {
+						echo "<div class='twelve wide centered column'>";
 						echo "<div class='ui orange raised segment'>";
 						echo "<div class='ui horizontal divider'>";
 						echo utf8_encode("<h2>$pro1[mus_titol]</h2>");
 						echo "</div>";
-						echo "<div class='ui left floated segment'>";
+						echo "<div class='flotante'>";
 						echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
 						echo "<h3>Autor: </h3><p>$pro1[usu_nom]</p>";
 						echo "<h3>Valoración: </h3>
-								<i class='star large icon'></i>
-								<i class='star half empty large icon'></i>
-								<i class='empty star large icon'></i>";
+								<div class='ui label'>
+  									<i class='thumbs up large icon'></i> 23
+								</div>";
+						echo "</div>";
 						echo "</div>";
 						echo "</div>";
 					}

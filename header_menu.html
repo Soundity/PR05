@@ -2,17 +2,21 @@
 	<head>
 		<title>Soundity</title>
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
+		
 		<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="js/prueba.js"></script>
 		<script src="js/menu.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	</head>
 	<body>
 		<header>
 		<!--HEADER DE LA PAGINA -->
 		<div class="ui top fixed menu">
-			<div class="menu">
+		
+			<div class="menu_general">
 				<i class="sidebar icon"></i>
 				<span>Menú</span>
 				<div class="ui right floated segment">
@@ -21,18 +25,12 @@
 							<form action="busqueda.php">
 								<input class="prompt" name="buscar" type="text" placeholder="Buscar...">
 							</form>
-							<i class="circular search link icon">
-								<ul>
-									<li><a href="modificar.php">Modificar Perfil</a></li>
-									<li><a href="listas_reproducion.php">Listas de Reprodución</a></li>
-								</ul>
-							</i>
+							<i class="circular search link icon"></i>
+
 						</div>
 					</div>
 					<i class="small circular inverted user icon"></i>
-					<a href="login.php" title="Sign Out">
-						<i class=" large sign out icon"></i>
-					</a>
+					<a href="login.php" title="Sign Out"><i class=" large sign out icon"></i></a>
 				</div>
 			</div>
 		</div>
@@ -48,8 +46,14 @@
 			</nav>
 		<!--FIN NAVEGADOR OCULTO DE LA PAGINA-->
 		</header>
-		</div>
-			
-		
+		<div class="general"></div>
+	
+		<section class="desplegable">
+			<ul>
+				<li><i class="edit icon"><a href="modificar.php"> Modificar Perfil</i></a></li>
+				<li><i class="music icon"><a href="listas_reproducion.php">&nbsp Listas de Reprodución</i></a></li>
+			</ul>
+		</section>
+
 	</body>
 </html>
