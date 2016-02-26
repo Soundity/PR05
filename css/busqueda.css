@@ -35,3 +35,7 @@ body{
 .no_result{
 	height: 0;
 }
+
+#nomOculto{
+	display: none;
+}
