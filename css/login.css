@@ -1,6 +1,6 @@
 
 body{
-	background-color: rgba(0, 0, 0, 0.58);
+	background-image: url("../media/images/Login/concierto-live.jpg");
 	top: 0;
 	margin: 0;
 	overflow: hidden;
@@ -19,8 +19,9 @@ body{
 	left: 35%;
 	position: absolute;
 	padding: 1%;
-	width: 25%;
-	background-color: #fff;
+	width: 30%;
+	background: #fff;
+	opacity: 0.92;
 	border-top: 5px solid #FBB03B;
 }
 
