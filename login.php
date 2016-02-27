@@ -53,7 +53,7 @@
 	  				<i class="lock icon"></i>
 				</div>
 	 		 </div>
-	 		</i><input type="submit" class="ui inverted orange button" value="Login"/>
+	 		<input type="submit" class="ui inverted orange button" value="Login"/>
 	 		 <input type="button" class="ui inverted orange button" onclick="location='registro.php'" value="Registrate"/>
 	 		
 		</div>
