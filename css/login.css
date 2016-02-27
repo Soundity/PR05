@@ -1,6 +1,9 @@
-
 body{
-	background-image: url("../media/images/Login/concierto-live.jpg");
+	background: url("../media/images/Login/concierto-live.jpg")no-repeat fixed center;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+	background-size: cover;
 	top: 0;
 	margin: 0;
 	overflow: hidden;
@@ -50,4 +53,7 @@ body{
 	box-shadow: 0 0 0 2px #ff851b inset!important;
 	margin-left: 0;
 }
+}
+.ui.form{
+	margin-bottom: 10px;
 }
