@@ -1,7 +1,7 @@
 
 #player{
     background: rgba(56,56,56,0.5);
-    /*border-radius: 1em;*/
+   /* border-radius: 1em;*/
     margin: 4em auto;
     width: 100%;
     position: fixed;
@@ -11,7 +11,7 @@
 
 #controls{
     background: rgba(56,56,56,0.5);
-    /*border-radius: 1em 1em 0 0;*/
+   /* border-radius: 1em 1em 0 0;*/
     height: 6em;
     margin: 0 auto;
     width: 100%;
@@ -46,9 +46,9 @@
 }
 
 #plause{
-    background: url(../media/images/play.png) no-repeat;
+    /*background: url(../media/images/play.png) no-repeat;
     background-position: center center;
-    background-size: cover;
+    background-size: cover;*/
     cursor: pointer;
     display: inline-block;
     height: 16px;
@@ -56,9 +56,9 @@
 }
 
 #stop{
-    background: url(../media/images/stop.png) no-repeat;
+    /*background: url(../media/images/stop.png) no-repeat;
     background-position: center center;
-    background-size: cover;
+    background-size: cover;*/
     cursor: pointer;
     display: inline-block;
     margin-left: 5px;
@@ -69,26 +69,23 @@
 #progressBar{
     background: rgba(216, 216, 216, 1);
     cursor: pointer;
-    /*border-radius: 1em;*/
     display: inline-block;
-    height: 20px;
+    height: 36px;
     vertical-align: middle;
     width: 60%;
 }
 
 #timeLoaded{
     background: rgba(46, 46, 46, 1);
-    /*border-radius: 1em;*/
-    height: 20px;
-    width: 0%;
+    height: 36px;
+    width: 80%;
 }
 
 #timePlayed{
     background: rgba(234, 164, 44, 1);
-    /*border-radius: 1em;*/
-    height: 20px;
-    /*margin-top: -36px;*/
-    width: 0%;
+    height: 36px;
+    margin-top: -36px;
+    width: 60%;
 }
 
 #volumeTime{
@@ -101,9 +98,10 @@
 
 #timeStatus{
     display: inline-block;
-    font-family: Arial;
-    font-size: 0.7em;
+    font-family: Raleway;
+    font-size: 1em;
     margin-left: 15%;
+    color: #fff;
 }
 
 input[type=range]{

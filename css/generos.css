@@ -18,7 +18,7 @@
 	width: 15em;
 	height: 13em;
 	text-align: center;
-	background-image: url(../media/images/logo.png);
+	/*background-image: url(../media/images/Logos/PNG/logo.png);*/
 	background-size: 10em 10em;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -37,8 +37,16 @@
 	display: block;
 	padding: 1%;
 	margin-top: 1%;
+	margin-left: 30%;
+	width: 60%;
 }
 
 audio{
 	margin-top: 2%;
+}
+
+
+.ui.floated.image, .ui.floated.images{
+	/*background: green;*/
+	margin-top: -10px;
 }

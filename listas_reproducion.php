@@ -3,7 +3,6 @@
 if(isset($_SESSION['id']))$login = 1;
 if(isset($_COOKIE['Soundity']))$login = 1;
 	if(isset($login)){
-include('header_menu.html');
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,6 +14,7 @@ include('header_menu.html');
 		<link href="css/listas_reproducion.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
+		<?php include('header_menu.html'); ?>
 		<div class="general">
 			<?php
 				include('conexion.php');

@@ -3,15 +3,24 @@
 	if(isset($_SESSION['id']))$login = 1;
 		if(isset($_COOKIE['Soundity']))$login = 1;
 		if($login == 1){
-	include('header_menu.html');
+	
 ?>
-<link rel="stylesheet" type="text/css" href="css/generos.css">
-<script type="text/javascript">
-	var element = document.getElementsByClassName('elemento_genero');
-	element.onmouseover = function(){
-		this.element.innerHTML = "<p>hola</p>";
-	}
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Soundity</title>
+	<link rel="stylesheet" type="text/css" href="css/generos.css">
+	<script type="text/javascript">
+		var element = document.getElementsByClassName('elemento_genero');
+		element.onmouseover = function(){
+			this.element.innerHTML = "<p>hola</p>";
+		}
+	</script>
+</head>
+<body>
+	<?php include('header_menu.html'); ?>
 	<section id="contenido">
 		<section id="generos">
 			<?php

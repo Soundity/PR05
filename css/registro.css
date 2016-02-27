@@ -1,6 +1,10 @@
 
 body{
-	background-image: url("../media/images/Login/concierto-live.jpg");
+	background: url("../media/images/Login/concierto-live.jpg")no-repeat fixed center;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+	background-size: cover;
 	top: 0;
 	margin: 0;
 	overflow: hidden;

@@ -4,7 +4,6 @@ session_start();
  if(isset($_COOKIE['Soundity']))$login = 1;
  if($login == 1){
 $con = mysqli_connect('localhost', 'root', '', 'bd_soundity');
-include('header_menu.html');
  ?>
 <html>
   <head>
@@ -12,7 +11,8 @@ include('header_menu.html');
     <title>Suscripciones</title>
   </head>
   <body>
-<?php 
+    <?php include('header_menu.html'); 
+
 $sql="SELECT * FROM tbl_subscripcions INNER JOIN tbl_usuari ON tbl_subscripcions.usu_id=tbl_usuari.usu_id WHERE tbl_usuari.usu_id=1";
 $datos = mysqli_query($con, $sql);
   if(mysqli_num_rows($datos)<=0){

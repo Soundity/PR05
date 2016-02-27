@@ -29,20 +29,20 @@ include('conexion.php');
                 
                 while($perfil = mysqli_fetch_array($datos)) {
                     echo "<div class='seven wide centered column'>";
-          echo "<div class='ui orange raised segment'>";
+          echo "<div class='ui yellow raised segment'>";
           echo "<div class='ui horizontal divider'>";
           echo utf8_encode("<h2>".$perfil['usu_nom']."</h2></div>");
 
                   if ($contador==0){
                             if(!empty($perfil['usu_avatar'])){
                               $fichero="media/images/avatares/$perfil[usu_avatar]";
-                              echo"</br><img  class='ui small center left circular floated image' src='$fichero'>";
+                              echo"</br><img  class='ui small center left rounded floated image' src='$fichero'>";
                              }else{
-                              echo"</br><img  src=media/images/avatares/usuario.jpeg>";
+                              echo"</br><img  src=media/images/avatar.jpg>";
                              }
                     
-                    echo "</br>";
-                    echo utf8_encode($perfil['usu_descripcio']);
+                    
+                    echo "<h3 class='ui header'>" . utf8_encode($perfil['usu_descripcio']) . "</h3>";
 
                     ?>
                     <section id="player" data-autoplay='1' data-loop='1'>
@@ -122,7 +122,7 @@ include('conexion.php');
                 while($perfil = mysqli_fetch_array($datos)) {
                   
                   echo "<div class='seven wide centered column'>";
-                  echo "<div class='ui orange raised segment'>";
+                  echo "<div class='ui yellow raised segment'>";
                   echo "<div class='ui horizontal divider'>";
                   echo utf8_encode("<h2>".$perfil['usu_nom']."</h2></div>");
                   if ($contador==0){
@@ -131,7 +131,7 @@ include('conexion.php');
           $fichero="media/images/avatares/$perfil[usu_avatar]";
           echo"</br><img  src='$fichero'>";
         }else{
-          echo"</br><img  src=media/images/avatares/usuario.jpeg>";
+          echo"</br><img  src='media/images/avatares/usuario.jpeg'>";
         }
                    
                     echo "</br>";

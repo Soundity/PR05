@@ -5,7 +5,6 @@ body{
 }
 
 .ui.grid{
-	margin-top: 3%;
 	width: 70%;
 	margin-left: 15%;
 }
@@ -21,6 +20,7 @@ body{
 }
 .ui.orange.button, .ui.orange.buttons .button{
 	background-color: #FBB03B;
+	margin-top: 5px;
 }
 .ui.label:last-child{
 	background-color: transparent;
@@ -28,14 +28,10 @@ body{
 .ui.orange.segment:not(.inverted){
 	height: 32%;
 }
-.flotante{
-	margin-left: 1%;
-	float: left;
-}
-.no_result{
-	height: 0;
+.ui.yellow.segment:not(.inverted){
+	height: 28%;
 }
 
-#nomOculto{
-	display: none;
+.ui.floated.image, .ui.floated.images{
+	margin-left: 10px;
 }

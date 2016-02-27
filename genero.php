@@ -34,8 +34,8 @@
 				</section>
 				<section id="playertrols">
 					<div id="plauseStop">
-						<div id="plause"></div>
-						<div id="stop"></div>
+						<div id="plause"><i class="play icon"></i></div>
+						<div id="stop"><i class="stop icon"></i></div>
 					</div>
 					<div id="progressBar">
 						<div id="timeLoaded"></div>

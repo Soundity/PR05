@@ -1,5 +1,5 @@
 body{
-	overflow: hidden;
+	/*overflow: hidden;*/
 	background-color: rgba(236, 185, 92, 0.51);
 }
 
@@ -163,4 +163,17 @@ i.inverted.bordered.icon, i.inverted.circular.icon{
 }
 .ui.fixed.menu, .ui[class*="top fixed"].menu{
 	height: 100;
+}
+.ui.floated.segment, .ui[class*="left floated"].segment{
+	position: absolute;
+	margin-top: -10px;
+	top: 1;
+}
+#sidebar{
+	float: left;
+	margin-top: 10px;
+}
+#logo{
+	margin-top: -15px;
+	margin-left: 5px;
 }

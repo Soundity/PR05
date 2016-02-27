@@ -3,7 +3,7 @@
 	if(isset($_SESSION['id']))$login = 1;
 	if(isset($_COOKIE['Soundity']))$login = 1;
 	if($login == 1){
-include('header_menu.html');
+
 include("conexion.php");
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@ include("conexion.php");
         <script type="text/javascript" src="/jsvalidaFormulario.js"></script>
 	</head>
 	<body>
-<?php
+		<?php include('header_menu.html'); 
 			$sql = "SELECT * FROM tbl_usuari WHERE usu_id=". $_SESSION['id'];
 			//mostramos la consulta para ver por pantalla si es lo que esperábamos o no
 			//echo "$sql<br/>";
@@ -61,7 +61,7 @@ include("conexion.php");
 					<?php echo $prod['usu_descripcio'];?>
 				</textarea>
 			Idioma : 
-				<input id="idioma" name= "idioma" class="element text" maxlength="20" size="48" value="<?php echo $prod['usu_idioma']; ?>"/><br/>
+				<input id="idioma" name= "idioma" class="element text" maxlength="20" size="48" value="<?php echo utf8_encode($prod['usu_idioma']); ?>"/><br/>
 			<!-- BOTON DE ENVIAR -->
 			<input type="submit" name="submit" value="Enviar" />
 			<?php
