@@ -19,7 +19,7 @@
 </head>
 <body>
 
-	<form class="ui center aligned orange segment" method="GET" action="procs/login.proc.php">
+	<form class="ui center aligned orange segment" method="POST" action="procs/login.proc.php">
 		<input type="hidden" name="login" value="si">
 		<h2 class="ui header">
   			Login
