@@ -26,36 +26,36 @@
 		</h2>
 		<!-- MENSAJES BUENOS -->
 		<?php
-		if(isset($creado_correctamente)) echo $creado_correctamente;
+		if(isset($creado_correctamente))
+			echo "<div class='ui form success'>
+ 			<div class='ui success message'><p>" . $creado_correctamente . "</p></div></div>" ;
 		?>
 		<!-- MENSAJES MALOS -->
 		<?php
-		if(isset($error_login)) echo $error_login;
-		if(isset($validarse)) echo $validarse;
+		if(isset($error_login))
+			echo "<div class='ui form error'>
+ 			<div class='ui error message'><p> " . $error_login . "</p></div></div>";
+		if(isset($validarse)) 
+			echo "<div class='ui form error'>
+ 			<div class='ui error message'><p> " . $validarse . "</p></div></div>";
 		?>
 		<div class="ui form">
 	  		<div class="five wide field">
 	   			<div class="ui left icon input">
 	  				<input type="text" placeholder="Email" name="correo">
 	  				<i class="mail icon"></i>
-	  				<!-- <div class="ui mini corner label">
-    					<i class="asterisk icon"></i>
-  					</div> -->
+	  				
 				</div>
 	  		</div>
 	  		<div class="five wide field">
 	  			<div class="ui left icon input">
 	  				<input type="password" placeholder="Password" name="contrasena">
 	  				<i class="lock icon"></i>
-	  				<!-- <div class="ui mini corner label">
-    					<i class="asterisk icon"></i>
-  					</div> -->
 				</div>
 	 		 </div>
 	 		</i><input type="submit" class="ui inverted orange button" value="Login"/>
 	 		 <input type="button" class="ui inverted orange button" onclick="location='registro.php'" value="Registrate"/>
-	 		<!--<button class="ui inverted orange button">Login</button>
-	 		<button class="ui inverted orange button">Registrate</button>-->
+	 		
 		</div>
 	</form>
 	
