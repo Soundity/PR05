@@ -1,12 +1,13 @@
-<?php  
-	session_start();
-include('header_menu.html');
+<?php
 include('conexion.php');
 	$sql0 = "SELECT * FROM tbl_usuari WHERE usu_nom LIKE'%$_REQUEST[buscar]%'";
 	$datos0 = mysqli_query($con, $sql0);
 	$sql1 = "SELECT * FROM tbl_musica INNER JOIN tbl_genere ON tbl_musica.gen_id=tbl_genere.gen_id INNER JOIN tbl_usuari on tbl_musica.usu_id = tbl_usuari.usu_id WHERE mus_titol LIKE'%$_REQUEST[buscar]%'";
 	$datos1 = mysqli_query($con, $sql1);
-
+	session_start();
+if(isset($_SESSION['id']))$login = 1;
+if(isset($_COOKIE['Soundity']))$login = 1;
+	if(isset($login)){
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,8 @@ include('conexion.php');
 		<link rel="stylesheet" href="css/busqueda.css">
 	</head>
 	<body>
-		<div class="ui grid">
+	<?php include('header_menu.html'); ?>
+		<div class="ui two column centered grid">
 		<?php
 			if(mysqli_num_rows($datos0)<=0){
 				echo "<div class='seven wide centered column'>";
@@ -37,9 +39,9 @@ include('conexion.php');
 					
 						if(!empty($pro0['usu_avatar'])){
 	          				$fichero="media/images/avatares/$pro0[usu_avatar]";
-	          				echo"<img class='ui small  centered circular image' src='$fichero'>";
+	          				echo"<img class='ui small centered circular image' src='$fichero'>";
 	        			}else{
-	          				echo"<img  src='media/images/avatar.jpg'>";
+	          				echo"<img class='ui small centered circular image' src='media/images/avatar.png'>";
 	        			}
 						
 							echo "<a href='verperfil.php?iduser=$pro0[usu_id]' class='ui orange button'>
@@ -51,7 +53,7 @@ include('conexion.php');
 			}
 		?>
 		</div> 
-		<div class="ui grid">
+		<div class="ui two column centered grid">
 			<?php
 				if(mysqli_num_rows($datos1)<=0){
 					echo "<div class='seven wide centered column'>";
@@ -70,7 +72,7 @@ include('conexion.php');
 						echo "</div>";
 						
 						echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
-						echo "<h3>Autor: </h3><p>$pro1[usu_nom]</p>";
+						echo utf8_encode("<h3>Autor: </h3><p>$pro1[usu_nom]</p>");
 						echo "<h3>Valoración: </h3>
 								<div class='ui label'>
   									<i class='thumbs up large icon'></i> 23
@@ -81,3 +83,10 @@ include('conexion.php');
   		</div> 
 	</body>
 </html>
+<?php
+	}else{
+		$_SESSION['validarse'] = 'error de validacio';
+		header("Location: login.php");
+		die();
+	}
+?>

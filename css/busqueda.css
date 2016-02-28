@@ -20,7 +20,7 @@ body{
 }
 .ui.orange.button, .ui.orange.buttons .button{
 	background-color: #FBB03B;
-	margin-top: 5px;
+	margin: 10px;
 }
 .ui.label:last-child{
 	background-color: transparent;
@@ -34,4 +34,7 @@ body{
 
 .ui.floated.image, .ui.floated.images{
 	margin-left: 10px;
+}
+.ui.centered.grid, .ui.centered.grid>.row, .ui.grid>.centered.row{
+	margin-left: 15%;
 }

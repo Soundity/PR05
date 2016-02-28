@@ -11,7 +11,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>Soundity</title>
 		<link href="css/generic.css" rel="stylesheet" type="text/css" />
-		<link href="css/listas_reproducion.css" rel="stylesheet" type="text/css" />
+		<!-- <link href="css/listas_reproducion.css" rel="stylesheet" type="text/css" /> -->
 	</head>
 	<body>
 		<?php include('header_menu.html'); ?>

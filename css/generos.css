@@ -45,8 +45,3 @@ audio{
 	margin-top: 2%;
 }
 
-
-.ui.floated.image, .ui.floated.images{
-	/*background: green;*/
-	margin-top: -10px;
-}
