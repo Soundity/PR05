@@ -21,14 +21,14 @@
 				die();
 			}
 		}else{
-			$_SESSION['error_login'] = 'error login';
+			$_SESSION['error_login'] = 'Debes introducir un email';
 			echo 2;
 			header("Location: ../login.php");
 			die();
 		}
 		mysqli_close($con);
 	}else{
-		$_SESSION['validarse'] = 'error validarse';
+		$_SESSION['validarse'] = 'Email o contraseña incorrectos';
 		echo 3;
 		header("Location: ../login.php");
 		die();

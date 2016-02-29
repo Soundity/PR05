@@ -19,14 +19,14 @@ body{
 }
 
 .ui.orange.segment:not(.inverted){
-	top: 5%;
 	left: 35%;
 	position: absolute;
 	padding: 1%;
-	width: 25%;
+	width: 30%;
 	background-color: #fff;
 	opacity: 0.92;
 	border-top: 5px solid #FBB03B;
+	top: 20%;
 }
 .error{
 	color: #FF0000;
@@ -56,4 +56,8 @@ body{
 	box-shadow: 0 0 0 2px #ff851b inset!important;
 	margin-left: 0;
 }
+}
+.ui.checkbox{
+
+	margin-left: 15%;
 }

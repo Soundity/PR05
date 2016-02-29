@@ -20,7 +20,7 @@
 #songTitle{
     border-radius: 1em 1em 0 0;
     display: block;
-    font-family: Arial;
+    font-family: Raleway;
     font-size: 0.9em;
     height: 25%;
     line-height: 1.7em;
@@ -30,6 +30,7 @@
     text-align: center;
     white-space: nowrap;
     width: 90%;
+    color: #fff;
 }
 
 #playertrols{

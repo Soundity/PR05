@@ -34,7 +34,7 @@
 		<?php
 		if(isset($error_login))
 			echo "<div class='ui form error'>
- 			<div class='ui error message'><p> " . $error_login . "</p></div></div>";
+ 			<div class='ui error message'><h3> " . $error_login . "</h3></div></div>";
 		if(isset($validarse)) 
 			echo "<div class='ui form error'>
  			<div class='ui error message'><p> " . $validarse . "</p></div></div>";

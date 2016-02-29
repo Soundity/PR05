@@ -1,24 +1,25 @@
 <?php
 	session_start();
-	if(isset($_SESSION['id']))$login = 1;
-		if(isset($_COOKIE['Soundity']))$login = 1;
-		if($login == 1){
+if(isset($_SESSION['id']))$login = 1;
+if(isset($_COOKIE['Soundity']))$login = 1;
+	if(isset($login)){
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Soundity</title>
-	<link rel="stylesheet" type="text/css" href="css/generos.css">
-	<link rel="stylesheet" type="text/css" href="css/styleRep1.css">
-	<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
-	<script type="text/javascript" src="js/botonesReproductor1.js"></script>
-</head>
-<body>
-<?php include('header_menu.html'); ?>
-<section id="contenido">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Soundity</title>
+		<link rel="stylesheet" type="text/css" href="css/generos.css">
+		<link rel="stylesheet" type="text/css" href="css/styleRep1.css">
+		<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+		<script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
+		<script type="text/javascript" src="js/botonesReproductor1.js"></script>
+		
+	</head>
+	<body>
+		<?php include('header_menu.html'); ?>
+		<section id="contenido">
 	<section id="generos">
 		<?php
 			include("conexion.php");
@@ -61,11 +62,11 @@
 		</section>
 	</section>
 </section>
-</body>
+	</body>
 </html>
 <?php
 	}else{
-		$_SESSION['validarse'] = 'error';
+		$_SESSION['validarse'] = 'error de validacio';
 		header("Location: login.php");
 		die();
 	}

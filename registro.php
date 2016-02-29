@@ -50,21 +50,31 @@
 					</div>
 					<!-- CHECKBOX DE GUSTOS -->
 					<label>Selecciona tus gustos: </label>
-					<div class="five wide field">
-						<?php 
+					<table class="ui basic table">
+					<tbody>
+						<?php
+						echo "<tr><td>";
+
+						$contador=1; 
 						while($valor=mysqli_fetch_array($datos)){
-							echo "<div class='ui checkbox'><input type='checkbox' name='gustos[]' value='".$valor['gen_id']."'/><label>".$valor['gen_nom']."</label></div>";     
-							
-							/*if ($cont == 5){
-								$cont=1;
-								echo "<br/>";
-							} else {
-								$cont++;
-							}*/
+							//echo "<tr>";
+
+							echo "<div class='ui checkbox'><input type='checkbox' name='gustos[]' value='".$valor['gen_id']."'/><label>".$valor['gen_nom']."</label></div></br>";
+			    			if($contador==5){
+			    				echo "</td><td>";
+			    				$contador=1;
+			    			} else {
+			    				$contador++;
+			    			}
 						}
+						echo "</tr>";
 						?>
 						<label>Mas adelante podras elegirlos y/o modificarlos.</label>
-					</div>
+						</tbody>
+						</table>
+					
+						
+					
 					
 					<!-- BOTON DE ENVIAR -->
 					<input type="submit" class="ui inverted orange button" name="submit" value="Registrarse" />
@@ -72,5 +82,6 @@
 				</div>
 			</form>
 		</div>
+		
 	</body>
 </html>
