@@ -25,10 +25,10 @@ header {
 	header nav {
 		width:20em;
 		height:100%;
-		position: absolute;
+		position: fixed;
 		background-color:#FBB03B;
 		left:-100%;
-
+		z-index:10;
 	}
 
 	header nav ul li {
