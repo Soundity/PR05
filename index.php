@@ -31,8 +31,29 @@ include('conexion.php');
 	<!-- CODI HTML DEL TOP 5-->
 	<div id="Top5">
 		<?php
-			$sql1 = "Select * From tbl_musica inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id order by tbl_valoracio.val_puntuacio limit 5";
-			
+			$sql1 = "Select distinct tbl_genere.gen_nom, tbl_usuari.usu_nom, tbl_musica.mus_titol, tbl_valoracio.mus_id, COUNT(tbl_valoracio.val_puntuacio) as 'totalvots' From tbl_musica inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id where tbl_valoracio.val_puntuacio=1 group by tbl_valoracio.mus_id limit 5";
+			$datos1 = mysqli_query($con, $sql1);
+			if(mysqli_num_rows($datos1)<=0){
+					echo "</br></br><div class='seven wide centered column'>";
+					echo "<div class='ui horizontal divider'>";
+					echo "";
+					echo "</div></div>";
+				}else{
+					echo "</br><div class='twelve wide centered column'><div class='ui horizontal divider'>";
+					echo "<h2>TOP 5</h2></div></div><div class='ui two column centered grid'>";
+					while($pro1 = mysqli_fetch_array($datos1)) {
+						echo "<div class='five wide centered column'>";
+						echo "<div class='ui orange center aligned raised segment'>";
+						echo "<div class='ui horizontal divider'>";
+						echo utf8_encode("<h2>$pro1[mus_titol]</h2>");
+						echo "</div>";
+						
+						echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
+						echo utf8_encode("<h3>Autor: </h3><p>$pro1[usu_nom]</p>");
+						echo "<h3>Valoración: </h3><div class='ui label'><i class='thumbs up large icon'></i>$pro1[totalvots]</div></div></div>";
+					}
+					echo "</div>";
+				}
 		?>
 	</div>
 	<!-- CODI HTML DELS GENERES PREFERITS-->	
