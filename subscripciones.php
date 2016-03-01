@@ -13,6 +13,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Soundity</title>
     <link href="css/subscripciones.css" rel="stylesheet" type="text/css" />
+    <link href="dist/semantic.min.css" rel="stylesheet" type="text/css" />
     
     <script>
 function objetoAjax(){
@@ -34,58 +35,31 @@ if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
   return xmlhttp;
 }
  
-//Función para recoger los datos del formulario y enviarlos por post  
-function enviarDatosEmpleado(idsub){
-  alert(idsub);
-  //div donde se mostrará lo resultados
-  //divResultado = document.getElementById('resultado');
-  //recogemos los valores de los inputs
 
-  //alert(document.nuevo_empleado[1].mandar.value);
-//alert(document.nuevo_empleado1.mandar.value);
-//var texto="document.nuevo_empleado"+idsub+".mandar.value";
-  //alert(eval(texto));
+function suscri(idsub){
+alert("Suscrito correctamente ");
 
-  
- // eval(document.nuevo_empleado+idsub+.mandar.value)="feo";
-  
-  //instanciamos el objetoAjax
+
   ajax=objetoAjax();
- //alert(idsub);
-  //uso del medotod POST
-  //archivo que realizará la operacion
-  //registro.php
+ 
  
   ajax.open("POST", "procs/subscripciones.proc.php",true);
 
-  //cuando el objeto XMLHttpRequest cambia de estado, la función se inicia
+  
   ajax.onreadystatechange=function() {
     
-    //la función responseText tiene todos los datos pedidos al servidor
+
     if (ajax.readyState==4) {
-      //mostrar resultados en esta capa
-    //divResultado.innerHTML = ajax.responseText
-      //llamar a funcion para limpiar los inputs
-    LimpiarCampos(idsub);
+
+  
   }
  }
   ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-  //enviando los valores a registro.php para que inserte los datos
+ 
   ajax.send("idsub="+idsub);
 }
- 
-//función para limpiar los campos
-function LimpiarCampos(idsub){
-  //document.nuevo_empleado1.mandar.value="Desubscribirse";
-  //alert(idsub);
-  //"document.nuevo_empleado"+idsub+".mandar.value"='Desubscribirse';
-  //"document.nuevo_empleado"+idsub+".mandar.value"="Desubscribirse";
-  //alert(eval("document.nuevo_empleado"+idsub+".mandar.value"));
 
-  //document.nuevo_empleado"+idsub+".mandar.value="Desubscribirse";
-  
-  
-}
+
     </script>
   </head>
   <body>
@@ -101,17 +75,9 @@ $datos = mysqli_query($con, $sql);
     $destacados="SELECT * FROM tbl_usuari INNER JOIN tbl_valoracio ON tbl_usuari.usu_id=tbl_valoracio.usu_id ORDER BY tbl_valoracio.val_puntuacio DESC LIMIT 10";
     $res= mysqli_query($con, $destacados);
       while($sugerencias = mysqli_fetch_array($res)) {
-             echo "$sugerencias[usu_nom]</br>";
-
-
-            ?>
-            <form name="nuevo_empleado" action="#" onsubmit="enviarDatosEmpleado(<?php echo $sugerencias['usu_id']; ?>); return false">
-                  <label><input id="idsub" name="idsub" type="hidden" value="<?php echo $sugerencias['usu_id']; ?>" /></label>
-                    <input type="submit" id="mandar" name="mandar" value="Suscribirse" />
-                
-                
-    </form>
-    <?php
+             echo "$sugerencias[usu_nom]";
+             echo "<i id=$sugerencias[usu_id] class=' large star icon' onclick='suscri($sugerencias[usu_id]);'></i></br>";
+              
       }
       echo "</center>";
   }else{
