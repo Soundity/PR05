@@ -2,7 +2,7 @@
 include('conexion.php');
 	$sql0 = "SELECT * FROM tbl_usuari WHERE usu_nom LIKE'%$_REQUEST[buscar]%'";
 	$datos0 = mysqli_query($con, $sql0);
-	$sql1 = "SELECT * FROM tbl_musica INNER JOIN tbl_genere ON tbl_musica.gen_id=tbl_genere.gen_id INNER JOIN tbl_usuari on tbl_musica.usu_id = tbl_usuari.usu_id WHERE mus_titol LIKE'%$_REQUEST[buscar]%'";
+	$sql1= "SELECT distinct tbl_genere.gen_nom, tbl_genere.gen_id, tbl_usuari.usu_nom, tbl_usuari.usu_id, tbl_musica.mus_titol, tbl_musica.mus_nom, tbl_valoracio.mus_id, tbl_valoracio.val_id, sum(tbl_valoracio.val_puntuacio) as 'totalvots' FROM tbl_musica INNER JOIN tbl_genere ON tbl_musica.gen_id=tbl_genere.gen_id INNER JOIN tbl_usuari on tbl_musica.usu_id = tbl_usuari.usu_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id WHERE mus_titol LIKE'%$_REQUEST[buscar]%' group by tbl_musica.mus_id";
 	$datos1 = mysqli_query($con, $sql1);
 	session_start();
 if(isset($_SESSION['id']))$login = 1;
@@ -16,6 +16,53 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 		<title>¡web de resultados!</title>
 		
 		<link rel="stylesheet" href="css/busqueda.css">
+		<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+		<script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
+		<script type="text/javascript" src="js/botonesReproductor1.js"></script>
+				 <script>
+			function objetoAjax(){
+			  var xmlhttp=false;
+			  try {
+			    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+			  } catch (e) {
+			 
+			  try {
+			    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			  } catch (E) {
+			    xmlhttp = false;
+			  }
+			}
+			 
+			if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+			    xmlhttp = new XMLHttpRequest();
+			  }
+			  return xmlhttp;
+			}
+			 
+
+			function suscri(idval){
+				alert(idval);
+
+
+			  ajax=objetoAjax();
+			 
+			 
+			  ajax.open("POST", "procs/valoracion.proc.php",true);
+
+			  
+			  ajax.onreadystatechange=function() {
+			    
+
+			    if (ajax.readyState==4) {
+
+			  
+			  }
+			 }
+			  ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			 
+			  ajax.send("idval="+idval);
+			}
+ 		</script>
 	</head>
 	<body>
 	<?php include('header_menu.html'); ?>
@@ -74,9 +121,19 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 						echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
 						echo utf8_encode("<h3>Autor: </h3><p>$pro1[usu_nom]</p>");
 						echo "<h3>Valoración: </h3>
-								<div class='ui label'>
-  									<i class='thumbs up large icon'></i> 23
-								</div></div></div>";
+								<div class='ui label'>";
+  									if ($pro1['totalvots']==1){
+
+										
+										echo"<i id=$pro1[mus_id] class=' thumbs outline up icon' onclick='suscri($pro1[mus_id]);'></i>$pro1[totalvots] Ya no te gusta </div></div></div>";
+									
+									
+									} else {
+									
+										
+										echo"<i id=$pro1[mus_id] class=' thumbs outline down icon' onclick='suscri($pro1[mus_id]);'></i>$pro1[totalvots] Te Gusta </div></div></div>";
+									}
+
 					}
 				}
 			?>
