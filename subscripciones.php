@@ -37,7 +37,6 @@ if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
  
 
 function suscri(idsub){
-alert("Suscrito correctamente ");
 
 
   ajax=objetoAjax();
@@ -50,8 +49,12 @@ alert("Suscrito correctamente ");
     
 
     if (ajax.readyState==4) {
+      if (document.getElementById(idsub).className =="large empty star icon"){
 
-  
+      document.getElementById(idsub).className ="large star icon";
+    }else{
+      document.getElementById(idsub).className ="large empty star icon";
+    }
   }
  }
   ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -63,30 +66,37 @@ alert("Suscrito correctamente ");
     </script>
   </head>
   <body>
-      <div class="recuadro">
-  <?php 
+    <?php 
   include('header_menu.html');
+  ?>
+      <div class="recuadro">
+  <?php
 $sql="SELECT * FROM tbl_subscripcions INNER JOIN tbl_usuari ON tbl_subscripcions.usu_id=tbl_usuari.usu_id WHERE tbl_usuari.usu_id=$_SESSION[id]";
 $datos = mysqli_query($con, $sql);
   if(mysqli_num_rows($datos)<=0){
     
     echo "<center>No estas suscrito a nada, aquí abajo tienes unas sugerencias a las cuales suscribirte";
     echo "</br>";
+    echo "</br>";
     $destacados="SELECT * FROM tbl_usuari INNER JOIN tbl_valoracio ON tbl_usuari.usu_id=tbl_valoracio.usu_id ORDER BY tbl_valoracio.val_puntuacio DESC LIMIT 10";
     $res= mysqli_query($con, $destacados);
       while($sugerencias = mysqli_fetch_array($res)) {
              echo "<a href='verperfil.php?iduser=$sugerencias[usu_id]' >$sugerencias[usu_nom]</a>";
-             echo "<i id=$sugerencias[usu_id] class=' large star icon' onclick='suscri($sugerencias[usu_id]);'></i></br>";
+             echo "<i id=$sugerencias[usu_id] class='large empty star icon' onclick='suscri($sugerencias[usu_id]);'></i></br>";
               
       }
       echo "</center>";
   }else{
+    ?>
+    <center>
+      <h1>Tus suscripciones</h1>
+      <?php
     while($suscr = mysqli_fetch_array($datos)) {
       $sql1="SELECT * FROM tbl_usuari WHERE usu_id=$suscr[usu_idorigen]";
       $datos1 = mysqli_query($con, $sql1);
       $user=mysqli_fetch_array($datos1);
-      echo "<center>";
-      echo "<a href='verperfil.php?iduser=$user[usu_id]'>$user[usu_nom]</a>";
+      
+      echo "<a href='verperfil.php?iduser=$user[usu_id]' >$user[usu_nom]</a>";
      
       ?>
 <form method="post" action="procs/subscripciones.proc.php" id="formulario" >
