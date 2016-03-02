@@ -78,10 +78,10 @@ $datos = mysqli_query($con, $sql);
     echo "<center>No estas suscrito a nada, aquí abajo tienes unas sugerencias a las cuales suscribirte";
     echo "</br>";
     echo "</br>";
-    $destacados="SELECT * FROM tbl_usuari INNER JOIN tbl_valoracio ON tbl_usuari.usu_id=tbl_valoracio.usu_id ORDER BY tbl_valoracio.val_puntuacio DESC LIMIT 10";
+    $destacados="Select sum(tbl_valoracio.val_puntuacio) as 'totalvots', tbl_usuari.usu_nom, tbl_usuari.usu_id From tbl_musica inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id inner join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id group by tbl_usuari.usu_id ORDER BY 'totalvots' DESC LIMIT 10";
     $res= mysqli_query($con, $destacados);
       while($sugerencias = mysqli_fetch_array($res)) {
-             echo "<a href='verperfil.php?iduser=$sugerencias[usu_id]' >$sugerencias[usu_nom]</a>";
+             echo utf8_encode("<a href='verperfil.php?iduser=$sugerencias[usu_id]' >$sugerencias[usu_nom]</a>");
              echo "<i id=$sugerencias[usu_id] class='large empty star icon' onclick='suscri($sugerencias[usu_id]);'></i></br>";
               
       }
@@ -96,7 +96,7 @@ $datos = mysqli_query($con, $sql);
       $datos1 = mysqli_query($con, $sql1);
       $user=mysqli_fetch_array($datos1);
       
-      echo "<a href='verperfil.php?iduser=$user[usu_id]' >$user[usu_nom]</a>";
+      echo utf8_encode("<a href='verperfil.php?iduser=$user[usu_id]' >$user[usu_nom]</a>");
      
       ?>
 <form method="post" action="procs/subscripciones.proc.php" id="formulario" >
