@@ -13,14 +13,7 @@
 	<title>Soundity</title>
 	<link rel="stylesheet" type="text/css" href="css/generos.css">
 	
-	<script>
-		function onHover(i){
-    		$("#" . id).attr('src', 'media/images/generos/Electronica_w.png');
-		}
-		function offHover(){
-    		$("#" .id).attr('src', 'media/images/generos/Electronica.png');
-		}
-	</script>
+	
 </head>
 <body>
 	<?php include('header_menu.html'); ?>
