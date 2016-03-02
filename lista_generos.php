@@ -18,6 +18,7 @@
 <body>
 	<?php include('header_menu.html'); ?>
 	<section id="contenido">
+	
 		<section id="generos">
 
 			<?php
@@ -43,6 +44,8 @@
 		</section>
 	
 	</section>
+
+	
 </body>
 </html>
 <?php

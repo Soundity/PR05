@@ -177,4 +177,11 @@ i.inverted.bordered.icon, i.inverted.circular.icon{
 	margin-top: -15px;
 	margin-left: 5px;
 }
-
+.ui.red.segment:not(.inverted){
+	height: 250px;
+	margin-left: 20%;
+	
+}
+.ui.small.image, .ui.small.images .image, .ui.small.images img, .ui.small.images svg{
+	margin-left: 2%;
+}

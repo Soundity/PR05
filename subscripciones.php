@@ -67,48 +67,44 @@ function suscri(idsub){
   </head>
   <body>
     <?php 
-  include('header_menu.html');
-  ?>
-      <div class="recuadro">
+        include('header_menu.html');
+    ?>
+                
+    <div class="ui raised very centered padded text container segment">
+
   <?php
 $sql="SELECT * FROM tbl_subscripcions INNER JOIN tbl_usuari ON tbl_subscripcions.usu_id=tbl_usuari.usu_id WHERE tbl_usuari.usu_id=$_SESSION[id]";
 $datos = mysqli_query($con, $sql);
   if(mysqli_num_rows($datos)<=0){
     
-    echo "<center>No estas suscrito a nada, aquí abajo tienes unas sugerencias a las cuales suscribirte";
-    echo "</br>";
-    echo "</br>";
+    echo "<h2 class='ui centered header'>No estas suscrito a nada, aquí abajo tienes unas sugerencias a las cuales suscribirte</h2>";
+    
     $destacados="Select sum(tbl_valoracio.val_puntuacio) as 'totalvots', tbl_usuari.usu_nom, tbl_usuari.usu_id From tbl_musica inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id inner join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id group by tbl_usuari.usu_id ORDER BY 'totalvots' DESC LIMIT 10";
     $res= mysqli_query($con, $destacados);
       while($sugerencias = mysqli_fetch_array($res)) {
-             echo utf8_encode("<a href='verperfil.php?iduser=$sugerencias[usu_id]' >$sugerencias[usu_nom]</a>");
-             echo "<i id=$sugerencias[usu_id] class='large empty star icon' onclick='suscri($sugerencias[usu_id]);'></i></br>";
+             echo utf8_encode("<center><a href='verperfil.php?iduser=$sugerencias[usu_id]' >$sugerencias[usu_nom]</a>");
+             echo "<i id=$sugerencias[usu_id] class='large empty star icon' onclick='suscri($sugerencias[usu_id]);'></i></center>";
               
       }
-      echo "</center>";
+      
   }else{
     ?>
-    <center>
-      <h1>Tus suscripciones</h1>
+    
+      <h2 class='ui centered header'>Tus suscripciones</h2>
       <?php
     while($suscr = mysqli_fetch_array($datos)) {
       $sql1="SELECT * FROM tbl_usuari WHERE usu_id=$suscr[usu_idorigen]";
       $datos1 = mysqli_query($con, $sql1);
       $user=mysqli_fetch_array($datos1);
       
-      echo utf8_encode("<a href='verperfil.php?iduser=$user[usu_id]' >$user[usu_nom]</a>");
+      echo utf8_encode("<div class='ui horizontal divider'><a href='verperfil.php?iduser=$user[usu_id]' >$user[usu_nom]</a></div>");
      
       ?>
-<form method="post" action="procs/subscripciones.proc.php" id="formulario" >
+        <form method="post" action="procs/subscripciones.proc.php" id="formulario" >
 
-
-
-
-<input  name="idsub" type="hidden" value="<?php echo $user['usu_id']; ?>">
-<input type="submit" id="btn_enviar" class='ui orange button' value="Desuscribirse">
-
-
-</form>
+        <input name="idsub" type="hidden" value="<?php echo $user['usu_id']; ?>">
+        <input type="submit" id="btn_enviar" class='ui inverted orange button' value="Desuscribirse">
+        </form> 
 
 
       <?php
@@ -118,9 +114,8 @@ $datos = mysqli_query($con, $sql);
   }
 
 ?>
-</center>
 </div>
-    </body>
+</body>
 </html>
 <?php
   }else{
