@@ -75,7 +75,7 @@ $datos = mysqli_query($con, $sql);
     $destacados="SELECT * FROM tbl_usuari INNER JOIN tbl_valoracio ON tbl_usuari.usu_id=tbl_valoracio.usu_id ORDER BY tbl_valoracio.val_puntuacio DESC LIMIT 10";
     $res= mysqli_query($con, $destacados);
       while($sugerencias = mysqli_fetch_array($res)) {
-             echo "$sugerencias[usu_nom]";
+             echo "<a href='verperfil.php?iduser=$sugerencias[usu_id]' >$sugerencias[usu_nom]</a>";
              echo "<i id=$sugerencias[usu_id] class=' large star icon' onclick='suscri($sugerencias[usu_id]);'></i></br>";
               
       }
@@ -86,7 +86,7 @@ $datos = mysqli_query($con, $sql);
       $datos1 = mysqli_query($con, $sql1);
       $user=mysqli_fetch_array($datos1);
       echo "<center>";
-      echo "$user[usu_nom]";
+      echo "<a href='verperfil.php?iduser=$user[usu_id]'>$user[usu_nom]</a>";
      
       ?>
 <form method="post" action="procs/subscripciones.proc.php" id="formulario" >
@@ -95,7 +95,7 @@ $datos = mysqli_query($con, $sql);
 
 
 <input  name="idsub" type="hidden" value="<?php echo $user['usu_id']; ?>">
-<input type="submit" id="btn_enviar" value="Desubscribirse">
+<input type="submit" id="btn_enviar" class='ui orange button' value="Desuscribirse">
 
 
 </form>
