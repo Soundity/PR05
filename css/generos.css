@@ -11,21 +11,33 @@
 }
 
 .elemento_genero{
-	position: center;
 	background: gray;
 	margin: 1%;
 	display: inline-flex;
 	width: 15em;
 	height: 13em;
-	text-align: center;
+	border-radius: 3px;
+	vertical-align: middle;
 	/*background-image: url(../media/images/Logos/PNG/logo.png);*/
 	background-size: 10em 10em;
 	background-repeat: no-repeat;
 	background-position: center center;
 }
 
+.elemento_genero h3{
+	color: #000;
+	text-align: center;
+	margin-top: 0;
+}
+
+
+.imagen{
+	margin-top: 10%;
+	margin-left: 20%;
+}
+
 .elemento_genero:hover{
-	background: #EAA42C;
+	background: #fff;
 }
 
 .elemento_genero p{
@@ -44,4 +56,3 @@
 audio{
 	margin-top: 2%;
 }
-
