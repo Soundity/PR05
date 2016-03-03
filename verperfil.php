@@ -91,7 +91,7 @@ function suscri(idsub){
                   echo "<i id=$perfil[usu_id] class='large star icon' onclick='suscri($perfil[usu_id]);'></i></br>";"</div>";
               }
             $totalSuscrip = mysqli_fetch_array($totales);
-                echo "$totalSuscrip[contador]";
+                echo "$totalSuscrip[contador] suscriptores";
               
                 if ($contador==0){
                     if(!empty($perfil['usu_avatar'])){
@@ -154,6 +154,8 @@ function suscri(idsub){
     }elseif(isset($_SESSION['id'])){
         $sql="SELECT * FROM tbl_usuari LEFT JOIN tbl_musica ON tbl_usuari.usu_id=tbl_musica.usu_id WHERE tbl_usuari.usu_id=$_SESSION[id]";
         $datos = mysqli_query($con, $sql);
+        $total="SELECT  COUNT(DISTINCT sub_id) AS contador FROM tbl_subscripcions WHERE usu_idorigen=$_SESSION[id]";
+        $totales= mysqli_query($con, $total);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -177,6 +179,8 @@ function suscri(idsub){
                 echo "<div class='ui red raised segment'>";
                 echo "<div class='ui horizontal divider'>";
                 echo utf8_encode("<h2>".$perfil['usu_nom']."</h2></div>");
+                $totalSuscrip = mysqli_fetch_array($totales);
+                echo "$totalSuscrip[contador] suscriptores";
                 if ($contador==0){
                     if(!empty($perfil['usu_avatar'])){
                         $fichero="media/images/avatares/$perfil[usu_avatar]";
