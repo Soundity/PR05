@@ -7,6 +7,11 @@ if($login == 1){
     if (isset($_REQUEST['iduser'])){
         $sql="SELECT * FROM tbl_usuari LEFT JOIN tbl_musica ON tbl_usuari.usu_id=tbl_musica.usu_id WHERE tbl_usuari.usu_id=$_REQUEST[iduser]";
         $datos = mysqli_query($con, $sql);
+        $seguir="SELECT * FROM tbl_subscripcions WHERE usu_idorigen=$_REQUEST[iduser] AND usu_id=$_SESSION[id]";
+        $suscrito = mysqli_query($con, $seguir);
+        $total="SELECT  COUNT(DISTINCT sub_id) AS contador FROM tbl_subscripcions WHERE usu_idorigen=$_REQUEST[iduser]";
+        $totales= mysqli_query($con, $total);
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -19,6 +24,55 @@ if($login == 1){
     <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
     <script type="text/javascript" src="js/botonesReproductor1.js"></script>
+    <script>
+function objetoAjax(){
+  var xmlhttp=false;
+  try {
+    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+  } catch (e) {
+ 
+  try {
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  } catch (E) {
+    xmlhttp = false;
+  }
+}
+ 
+if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+    xmlhttp = new XMLHttpRequest();
+  }
+  return xmlhttp;
+}
+ 
+
+function suscri(idsub){
+
+
+  ajax=objetoAjax();
+ 
+ 
+  ajax.open("POST", "procs/subscripciones.proc.php",true);
+
+  
+  ajax.onreadystatechange=function() {
+    
+
+    if (ajax.readyState==4) {
+      if (document.getElementById(idsub).className =="large empty star icon"){
+
+      document.getElementById(idsub).className ="large star icon";
+    }else{
+      document.getElementById(idsub).className ="large empty star icon";
+    }
+  }
+ }
+  ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ 
+  ajax.send("idsub="+idsub);
+}
+
+
+    </script>
 </head>
 <body>
     <?php include('header_menu.html'); ?>
@@ -29,7 +83,16 @@ if($login == 1){
                 echo "<div class='seven wide centered column'>";
                 echo "<div class='ui red raised segment'>";
                 echo "<div class='ui horizontal divider'>";
-                echo utf8_encode("<h2>".$perfil['usu_nom']."</h2></div>");
+                echo utf8_encode("<h2>".$perfil['usu_nom']."</h2>");
+                if(mysqli_num_rows($suscrito)<=0){
+              
+                echo "<i id=$perfil[usu_id] class='large empty star icon' onclick='suscri($perfil[usu_id]);'></i></br>";"</div>";
+              }else{
+                  echo "<i id=$perfil[usu_id] class='large star icon' onclick='suscri($perfil[usu_id]);'></i></br>";"</div>";
+              }
+            $totalSuscrip = mysqli_fetch_array($totales);
+                echo "$totalSuscrip[contador]";
+              
                 if ($contador==0){
                     if(!empty($perfil['usu_avatar'])){
                         $fichero="media/images/avatares/$perfil[usu_avatar]";
