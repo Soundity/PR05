@@ -12,10 +12,20 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 		<title>Soundity</title>
 		<link href="css/generic.css" rel="stylesheet" type="text/css" />
 		<!-- <link href="css/listas_reproducion.css" rel="stylesheet" type="text/css" /> -->
+    	<script>
+			//funcion que muestra el div oculto
+			function mostrar(){
+      		document.getElementById("alista").style="display:inline;"
+  			}
+    	</script>
 	</head>
 	<body>
+
+
 		<?php include('header_menu.html'); ?>
+
 		<div class="general">
+
 			<?php
 				include('conexion.php');
 				$user = $_SESSION['id'];
@@ -28,15 +38,27 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 						$llistanom = utf8_encode($send['lli_nom']);
 						$idllista = $send['lli_id'];
 						?>
-						<a href="lista.php?idllista=<?php echo $idllista;?>"><?php echo $llistanom;?></a></br>
+						<a href="lista.php?idllista=<?php echo $idllista;?>"><?php echo $llistanom;?></a></br>		
+					
 						<?php
 					}
 					echo "</div>";
+
 				}else{
-					echo "No hay listas de reprodución creadas.";
+					echo "No hay listas de reprodución creadas.</br></br>";
 				}	
 			?>
 		</div>
+												
+					<a href="#" onclick="mostrar();">Añade una nueva lista de reproducción: </a>
+		   				<div id="alista" style="visibility: hidden">
+		      			<form action="procs/crear_lista.proc.php" method="post">
+			  				Introduce el nombre de la lista:
+			  				<input type="text" name="lista">
+			   				<br/>
+			 			 	<input type="submit" value="Enviar" />
+						</form>
+
     </div>
 	</body>
 </html>
