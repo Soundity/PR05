@@ -26,7 +26,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 				include('conexion.php');
 				$user = $_SESSION['id'];
 				$llista = $_REQUEST['idllista'];
-				$sql = "SELECT * FROM tbl_usuari inner join tbl_llistes on tbl_usuari.usu_id=tbl_llistes.usu_id inner join tbl_llistes_musica on tbl_llistes.lli_id=tbl_llistes_musica.lli_id inner join tbl_musica on tbl_llistes_musica.mus_id=tbl_musica.mus_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id where tbl_llistes.lli_id=".$llista;
+				$sql = "SELECT * FROM tbl_usuari inner join tbl_llistes on tbl_usuari.usu_id=tbl_llistes.usu_id inner join tbl_llistes_musica on tbl_llistes.lli_id=tbl_llistes_musica.lli_id inner join tbl_musica on tbl_llistes_musica.mus_id=tbl_musica.mus_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id as idguai from tbl_valoracio group by 'idguai') as queryGen on tbl_musica.mus_id=queryGen.idguai where tbl_llistes.lli_id=".$llista;
 				$datos = mysqli_query ($con, $sql);
 				if(mysqli_num_rows($datos)>0){
 					$llistanom="hola";
