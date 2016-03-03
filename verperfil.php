@@ -80,18 +80,21 @@ function suscri(idsub){
         <?php
             $contador=0;
             while($perfil = mysqli_fetch_array($datos)) {
-                echo "<div class='seven wide centered column'>";
-                echo "<div class='ui red raised segment'>";
-                echo "<div class='ui horizontal divider'>";
-                echo utf8_encode("<h2>".$perfil['usu_nom']."</h2>");
+            ?>
+                <div class='nine wide centered column'>
+                <div class='ui red raised segment'>
+                <div class='ui horizontal divider'>
+            <?php
+                
                 if(mysqli_num_rows($suscrito)<=0){
-              
-                echo "<i id=$perfil[usu_id] class='large empty star icon' onclick='suscri($perfil[usu_id]);'></i></br>";"</div>";
+                echo utf8_encode("<h2>".$perfil['usu_nom']."<i id=$perfil[usu_id] class='large empty star icon' onclick='suscri($perfil[usu_id]);'></i></h2></div>");
+                
               }else{
-                  echo "<i id=$perfil[usu_id] class='large star icon' onclick='suscri($perfil[usu_id]);'></i></br>";"</div>";
+                echo utf8_encode("<h2>".$perfil['usu_nom']."<i id=$perfil[usu_id] class='large star icon' onclick='suscri($perfil[usu_id]);'></i></h2></div>");
+                  //echo "<i id=$perfil[usu_id] class='large star icon' onclick='suscri($perfil[usu_id]);'></i></div>";
               }
             $totalSuscrip = mysqli_fetch_array($totales);
-                echo "$totalSuscrip[contador] suscriptores";
+                
               
                 if ($contador==0){
                     if(!empty($perfil['usu_avatar'])){
@@ -101,6 +104,7 @@ function suscri(idsub){
                         echo"</br><img  src=media/images/avatar.jpg>";
                     }
                     echo "<h3 class='ui header'>" . utf8_encode($perfil['usu_descripcio']) . "</h3>";
+                    echo "<h4 class='ui header'>" .$totalSuscrip['contador'] ." suscriptores </h4>";
             ?>
                 <section id="player" data-autoplay='1' data-loop='1'>
                     <section id="controls">
@@ -109,7 +113,7 @@ function suscri(idsub){
                         </section>
                         <section id="playertrols">
                             <div id="plauseStop">
-                                <div id="plause"><i class="play icon"></i></div>
+                                <div id="plause"><i id="playPause" class="play icon"></i></div>
                                 <div id="stop"><i class="stop icon"></i></div>
                             </div>
 
@@ -180,16 +184,17 @@ function suscri(idsub){
                 echo "<div class='ui horizontal divider'>";
                 echo utf8_encode("<h2>".$perfil['usu_nom']."</h2></div>");
                 $totalSuscrip = mysqli_fetch_array($totales);
-                echo "$totalSuscrip[contador] suscriptores";
+                
                 if ($contador==0){
                     if(!empty($perfil['usu_avatar'])){
                         $fichero="media/images/avatares/$perfil[usu_avatar]";
-                        echo"</br><img  class='ui small circular center left rounded floated image' src='$fichero'>";
+                        echo"</br><img  class='ui small center left rounded floated image' src='$fichero'>";
                     }else{
-                        echo"</br><img  class='ui small circular left rounded floated image' src='media/images/avatares/usuario.jpeg'>";
+                        echo"</br><img  class='ui small left rounded floated image' src='media/images/avatares/usuario.jpeg'>";
                     }  
                 
                 echo "<h3 class='ui header'>" . utf8_encode($perfil['usu_descripcio']) . "</h3>";
+                 echo "<h4 class='ui header'>" .$totalSuscrip['contador'] ." suscriptores </h4>";
         ?>
     <section id="player" data-autoplay='1' data-loop='1'>
         <section id="controls">
