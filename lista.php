@@ -18,6 +18,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     	<script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
     	<script type="text/javascript" src="js/botonesReproductor2.js"></script>
+		<script type="text/javascript" src="js/valoracion.js"></script>
 	</head>
 	<body>
 	<?php include('header_menu.html'); ?>
@@ -26,7 +27,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 				include('conexion.php');
 				$user = $_SESSION['id'];
 				$llista = $_REQUEST['idllista'];
-				$sql = "SELECT * FROM tbl_usuari inner join tbl_llistes on tbl_usuari.usu_id=tbl_llistes.usu_id inner join tbl_llistes_musica on tbl_llistes.lli_id=tbl_llistes_musica.lli_id inner join tbl_musica on tbl_llistes_musica.mus_id=tbl_musica.mus_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id as idguai from tbl_valoracio group by 'idguai') as queryGen on tbl_musica.mus_id=queryGen.idguai where tbl_llistes.lli_id=".$llista;
+				$sql = "SELECT tbl_musica.mus_id, tbl_musica.mus_nom, tbl_musica.mus_titol, tbl_usuari.usu_nom, tbl_genere.gen_nom, tbl_llistes.lli_nom, totalvots FROM tbl_usuari inner join tbl_llistes on tbl_usuari.usu_id=tbl_llistes.usu_id inner join tbl_llistes_musica on tbl_llistes.lli_id=tbl_llistes_musica.lli_id inner join tbl_musica on tbl_llistes_musica.mus_id=tbl_musica.mus_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id from tbl_valoracio group by mus_id) as queryGen on tbl_musica.mus_id=queryGen.mus_id where tbl_llistes.lli_id=".$llista;
 				$datos = mysqli_query ($con, $sql);
 				if(mysqli_num_rows($datos)>0){
 					$llistanom="hola";
@@ -39,7 +40,31 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 						}
 						?>
 						<article class="cancion" data-source="media/music/<?php echo $send['mus_nom'] ?>">
-							<p><?php echo "Nombre: ".$send['mus_titol']."   |   Genero: ".$send['gen_nom']; ?></p>
+							<p><?php echo utf8_encode("Nombre: ".$send['mus_titol']."   |   Genero: ".$send['gen_nom']. "   |    Valoración: "); 
+							$usuari=$_SESSION['id'];
+						$sql2 = "Select * from tbl_valoracio where mus_id=$send[mus_id] AND usu_id=$usuari";
+						//echo $sql2;
+						$datos2 = mysqli_query($con, $sql2);
+						if(mysqli_num_rows($datos2)==0){
+							// POTS VOTAR
+							echo"<i id=$send[mus_id] class=' thumbs outline up icon' onclick='suscriM($send[mus_id]);'></i>";
+							echo"<i id=$send[mus_id] class=' thumbs outline down icon' onclick='suscriN($send[mus_id]);'></i>";
+							if ($send['totalvots']!=0){
+								echo $send['totalvots']. " Votos";
+							} else {
+								echo "0 Votos";
+							}
+						}else{
+							// JA HAS VOTAT 
+							while($pro2 = mysqli_fetch_array($datos2)) {	
+								if ($pro2['val_puntuacio']==1){
+									echo"<i id=$send[mus_id] class=' thumbs outline down icon' onclick='suscriN($send[mus_id]);'></i>$send[totalvots] Te Gusta ";
+								} else {
+									echo"<i id=$send[mus_id] class=' thumbs outline up icon' onclick='suscriM($send[mus_id]);'></i>$send[totalvots] Ya no te gusta ";
+									
+								}
+							}
+						}?></p>
 						</article>
 					<?php
 					}

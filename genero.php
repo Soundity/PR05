@@ -30,9 +30,9 @@
 				while($cancion = mysqli_fetch_array($datos)){
 					?>
 					<article class="cancion" data-source="media/music/<?php echo $cancion['mus_nom'] ?>">
-						<p><?php echo "Nombre: ".$cancion['mus_titol']."   |   Genero: ".$_REQUEST['genNom']; echo "   |    Valoración: ";
+						<p><?php echo "Nombre: ".$cancion['mus_titol']."   |   Genero: ".$_REQUEST['genNom']. "   |    Valoración: ";
 						$usuari=$_SESSION['id'];
-						$sql2 = "Select * from tbl_valoracio where mus_id=$cancion[mus_id] & usu_id=$usuari";
+						$sql2 = "Select * from tbl_valoracio where mus_id=$cancion[mus_id] AND usu_id=$usuari";
 						//echo $sql2;
 						$datos2 = mysqli_query($con, $sql2);
 						if(mysqli_num_rows($datos2)==0){
@@ -51,7 +51,6 @@
 									echo"<i id=$cancion[mus_id] class=' thumbs outline down icon' onclick='suscriN($cancion[mus_id]);'></i>$cancion[totalvots] Te Gusta ";
 								} else {
 									echo"<i id=$cancion[mus_id] class=' thumbs outline up icon' onclick='suscriM($cancion[mus_id]);'></i>$cancion[totalvots] Ya no te gusta ";
-									
 								}
 							}
 						}?></p>
