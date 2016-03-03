@@ -48,11 +48,14 @@
 	display: block;
 	padding: 1%;
 	margin-top: 1%;
-	margin-left: 30%;
+	margin-left: 25%;
 	width: 60%;
 	background: #AFAFAF;
 }
 
 audio{
 	margin-top: 2%;
+}
+#title{
+    margin-left: 35%;
 }

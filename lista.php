@@ -3,7 +3,7 @@
 if(isset($_SESSION['id']))$login = 1;
 if(isset($_COOKIE['Soundity']))$login = 1;
 	if(isset($login)){
-include('header_menu.html');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +20,7 @@ include('header_menu.html');
     	<script type="text/javascript" src="js/botonesReproductor2.js"></script>
 	</head>
 	<body>
+	<?php include('header_menu.html'); ?>
 		<div class="general">
 			<?php
 				include('conexion.php');
@@ -34,7 +35,7 @@ include('header_menu.html');
 					while ($send = mysqli_fetch_array($datos)){
 						if($llistanom != utf8_encode($send['lli_nom'])){
 							$llistanom = utf8_encode($send['lli_nom']);
-							echo "<h1>".$llistanom."</h1>";
+							echo "<h1 id='title'>".$llistanom."</h1>";
 						}
 						?>
 						<article class="cancion" data-source="media/music/<?php echo $send['mus_nom'] ?>">
