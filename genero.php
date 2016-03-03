@@ -15,6 +15,7 @@
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
 	<script type="text/javascript" src="js/botonesReproductor1.js"></script>
+	<script type="text/javascript" src="js/valoracion.js"></script>
 </head>
 <body>
 <?php include('header_menu.html'); ?>
@@ -22,13 +23,38 @@
 	<section id="generos">
 		<?php
 			include("conexion.php");
-			$sql = "SELECT * FROM tbl_musica WHERE gen_id=$_REQUEST[gen]";
+			$sql = "SELECT tbl_musica.mus_id, tbl_musica.mus_nom, tbl_musica.mus_titol, tbl_usuari.usu_nom, totalvots FROM tbl_musica inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id from tbl_valoracio group by mus_id) as queryGen on tbl_musica.mus_id=queryGen.mus_id WHERE gen_id=$_REQUEST[gen] order BY totalvots DESC";
+			//echo $sql;
 			$datos = mysqli_query($con, $sql);
 			if(mysqli_num_rows($datos)>0){
 				while($cancion = mysqli_fetch_array($datos)){
 					?>
 					<article class="cancion" data-source="media/music/<?php echo $cancion['mus_nom'] ?>">
-						<p><?php echo "Nombre: ".$cancion['mus_titol']."   |   Genero: ".$_REQUEST['genNom']; ?></p>
+						<p><?php echo "Nombre: ".$cancion['mus_titol']."   |   Genero: ".$_REQUEST['genNom']; echo "   |    Valoración: ";
+						$usuari=$_SESSION['id'];
+						$sql2 = "Select * from tbl_valoracio where mus_id=$cancion[mus_id] & usu_id=$usuari";
+						//echo $sql2;
+						$datos2 = mysqli_query($con, $sql2);
+						if(mysqli_num_rows($datos2)==0){
+							// POTS VOTAR
+							echo"<i id=$cancion[mus_id] class=' thumbs outline up icon' onclick='suscriM($cancion[mus_id]);'></i>";
+							echo"<i id=$cancion[mus_id] class=' thumbs outline down icon' onclick='suscriN($cancion[mus_id]);'></i>";
+							if ($cancion['totalvots']!=0){
+								echo $cancion['totalvots']. " Votos";
+							} else {
+								echo "0 Votos";
+							}
+						}else{
+							// JA HAS VOTAT 
+							while($pro2 = mysqli_fetch_array($datos2)) {	
+								if ($pro2['val_puntuacio']==1){
+									echo"<i id=$cancion[mus_id] class=' thumbs outline down icon' onclick='suscriN($cancion[mus_id]);'></i>$cancion[totalvots] Te Gusta ";
+								} else {
+									echo"<i id=$cancion[mus_id] class=' thumbs outline up icon' onclick='suscriM($cancion[mus_id]);'></i>$cancion[totalvots] Ya no te gusta ";
+									
+								}
+							}
+						}?></p>
 					</article>
 					<?php
 				}
