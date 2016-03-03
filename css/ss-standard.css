@@ -149,7 +149,8 @@
     background: rgba(0,0,0,0.1);
     display: none;
     float: left;
-    margin: 0 0 0 20%;
+    margin-left: 20%;
+    width: 400px;
     
 }
  
@@ -254,5 +255,10 @@
 
 #myForm{
     display: inline-block;
-    margin: 1% 2% 2% 2%;
+    margin-right: 33%;
+    margin-top: 2%;
+    float: right;
+}
+.ui.pointing.below.label, .ui.pointing.bottom.label{
+    margin-top: 10px;
 }

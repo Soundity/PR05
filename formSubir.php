@@ -1,8 +1,9 @@
 <?php
 	//echo "<span>".$_REQUEST['nom'].": </span>";
-	echo "<span>Titulo: </span>";
+  echo "<div class='ui form'>";
+	echo "<div class='ui pointing below orange basic label'>Titulo: </div>";
 	echo "<input type='text' id='titulo[".$_REQUEST['num']."]'>";
-	echo "<span>Categoria: </span>";
+	echo "<div class='ui pointing below orange basic label'>Categoria: </div>";
 	echo "<select id='genero[".$_REQUEST['num']."]'>";
 
 	include("conexion.php");
@@ -13,5 +14,6 @@
 			echo "<option value='".$genero['gen_id']."'>".$genero['gen_nom']."</option>";
 		}
 	}
+	echo "</div>";
 ?>
-</select><br/><br/>
+</select>

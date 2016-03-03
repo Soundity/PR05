@@ -14,9 +14,9 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 		<link href="css/listas_reproducion.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
+	<?php include('header_menu.html'); ?>
 		<div class="general">
 			<?php
-				include('header_menu.html');
 				include('conexion.php');
 				$user = $_SESSION['id'];
 				$llista = $_REQUEST['idllista'];

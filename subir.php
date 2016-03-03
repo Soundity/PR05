@@ -22,7 +22,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 			<form action="procs/subir.proc.php">
 				<input type="hidden" id="usuario" value="<?php echo $_SESSION['id'] ?>">
 				<div id="drop-files" ondragover="return false"> <!-- ondragover for firefox -->
-		    		Drop Music Here
+		    		Arrasta tu musica para Subir
 				</div>
 				<div id="myForm">
 					
@@ -30,7 +30,8 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 				<div id="uploaded-holder">
 				    <div id="dropped-files">
 				        <div id="upload-button">
-				            <input type="submit" value="Upload!" class="upload"><i class="ss-upload"> </i>
+				            <input type="submit" value="Subir!" class="ui inverted orange button"><i class="ss-upload"> </i>
+
 				            <a href="#" class="delete"><i class="ss-delete"> </i>X</a>
 				            <span>0 Files</span>
 				        </div>

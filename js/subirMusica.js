@@ -13,7 +13,7 @@ $(document).ready(function() {
             // CONTROL DE ERRORES
 			if (!files[index].type.match('audio.*')) {
     			if(errMessage == 0) {
-        			$('#drop-files').html('Hey! Audios only');
+        			$('#drop-files').html('Hey! Solo Archivos de Audio');
         			++errMessage;
     			}
     			else if(errMessage == 1) {
@@ -44,7 +44,7 @@ $(document).ready(function() {
 
                     if(dataArray.length == 1) {
                         $('#upload-button span').html("1 file to be uploaded");
-                        document.getElementById("myForm").innerHTML = "<p>Introduce los datos de mayor a menor tamaño (Mb)</p>";
+                        document.getElementById("myForm").innerHTML = "<h3>Introduce los datos de mayor a menor tamaño (Mb)</h3>";
                         document.getElementById("myForm").innerHTML += "<div id='formulario"+dataArray.length+"'</div>";
                         $('#formulario'+dataArray.length).load("formSubir.php?num="+dataArray.length);
                     } else {
