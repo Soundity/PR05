@@ -48,37 +48,33 @@
 						<input id="apodo" name="apodo"  maxlength="30" size="30" value=""/>
 						<span id="error_apodo" class="error"></span>
 					</div>
+
 					<!-- CHECKBOX DE GUSTOS -->
 					<label>Selecciona tus gustos: </label>
 					<table class="ui basic table">
-					<tbody>
-						<?php
-						echo "<tr><td>";
+						<tbody>
+							<?php
+							echo "<tr><td>";
 
-						$contador=1; 
-						while($valor=mysqli_fetch_array($datos)){
-							//echo "<tr>";
-
-							echo "<div class='ui checkbox'><input type='checkbox' name='gustos[]' value='".$valor['gen_id']."'/><label>".$valor['gen_nom']."</label></div></br>";
-			    			if($contador==5){
-			    				echo "</td><td>";
-			    				$contador=1;
-			    			} else {
-			    				$contador++;
-			    			}
-						}
-						echo "</tr>";
-						?>
-						<label>Mas adelante podras elegirlos y/o modificarlos.</label>
+							$contador=1; 
+							while($valor=mysqli_fetch_array($datos)){
+								//echo "<tr>";
+								echo "<div class='ui checkbox'><input type='checkbox' name='gustos[]' value='".$valor['gen_id']."'/><label>".$valor['gen_nom']."</label></div></br>";
+				    			if($contador==5){
+				    				echo "</td><td>";
+				    				$contador=1;
+				    			} else {
+				    				$contador++;
+				    			}
+							}
+							echo "</tr>";
+							?>
+							<label>Mas adelante podras elegirlos y/o modificarlos.</label>
 						</tbody>
-						</table>
-					
-						
-					
-					
+					</table>
 					<!-- BOTON DE ENVIAR -->
 					<input type="submit" class="ui inverted orange button" name="submit" value="Registrarse" />
-					 <input type="button" class="ui inverted orange button" onclick="location='Login.php'" value="Atrás"/>
+					<input type="button" class="ui inverted orange button" onclick="location='Login.php'" value="Atrás"/>
 				</div>
 			</form>
 		</div>

@@ -14,6 +14,7 @@
 			while($send = mysqli_fetch_array($datos)){
 				$_SESSION['mail']= $send['usu_mail'];
 				$_SESSION['id']= $send['usu_id'];
+				$_SESSION['pass']= $send['usu_contra'];
 				echo $_SESSION['id']. "<br>";
 				echo $_SESSION['mail']. "<br>";
 				echo 1 . "<br>";

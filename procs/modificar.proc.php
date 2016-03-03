@@ -4,23 +4,28 @@
 	if(isset($_COOKIE['Soundity']))$login = 1;
 	if($login == 1){
 		include("../conexion.php");
-		$password=md5($_REQUEST['contrasena']);
-		$apodo=$_REQUEST['apodo'];
+		if(!isset($_REQUEST['contrasena']) || empty($_REQUEST['contrasena'])){
+			$password=$_SESSION['pass'];
+		}else{
+			$password=md5($_REQUEST['contrasena']);
+		}
+
+		$apodo=utf8_decode($_REQUEST['apodo']);
 		$correo=$_REQUEST['correo'];
-		$descrip=$_REQUEST['descripcion'];
-		$idioma=$_REQUEST['idioma'];
+		$descrip=utf8_decode($_REQUEST['descripcion']);
+		$idioma=utf8_decode($_REQUEST['idioma']);
 		echo $_FILES['imagen']['name'];
 		if(empty($_FILES['imagen']['name'])){
 			$sql = "UPDATE tbl_usuari SET usu_nom='$apodo', usu_mail='$correo', usu_contra='$password', usu_descripcio='$descrip', usu_idioma='$idioma' WHERE usu_id=$_SESSION[id]";
 			$datos = mysqli_query($con, $sql);
-			header("location: ../modificar.php");
+			
 		}else{
 			$ruta = "../media/images/avatares/".$_SESSION['id']."_".$_FILES['imagen']['name'];
 			$imagen=$_SESSION['id']."_".$_FILES['imagen']['name'];
 			$resultado = @move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
 			$sql = "UPDATE tbl_usuari SET usu_nom='$apodo', usu_avatar='$imagen', usu_mail='$correo', usu_contra='$password', usu_descripcio='$descrip', usu_idioma='$idioma' WHERE usu_id=$_SESSION[id]";
 			$datos = mysqli_query($con, $sql);
-			header("location: ../modificar.php");
+			
 		}
 
 		if (mysqli_affected_rows($con) == 1){
@@ -31,6 +36,7 @@
 				for($i=0; $i<count($gustos); $i++) {
 				    $gusto = $gustos[$i];
 				    $sql3 = "INSERT INTO `bd_soundity`.`tbl_genere_usuari` (`gus_id`, `usu_id`, `gen_id`) VALUES (NULL, '$_SESSION[id]', '$gusto')";
+				    echo $sql3;
 				    $datos3 = mysqli_query($con,$sql3);
 				}
 				header("location: ../modificar.php");
@@ -38,6 +44,7 @@
 				$sql2= "DELETE FROM `tbl_genere_usuari` WHERE `usu_id`=$_SESSION[id]";
 				$datos2 = mysqli_query($con,$sql2);
 				header("location: ../modificar.php");
+				
 			}
 		}else{
 			header("location: ../modificar.php");
