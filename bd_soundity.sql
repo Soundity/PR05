@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-02-2016 a las 13:13:21
+-- Tiempo de generación: 03-03-2016 a las 18:30:27
 -- Versión del servidor: 5.6.21
--- Versión de PHP: 5.6.3
+-- Versión de PHP: 5.5.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -140,8 +140,8 @@ CREATE TABLE IF NOT EXISTS `tbl_llistes_musica` (
 
 CREATE TABLE IF NOT EXISTS `tbl_musica` (
 `mus_id` int(11) NOT NULL,
-  `mus_nom` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `mus_titol` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `mus_nom` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `mus_titol` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `usu_comptador` int(11) DEFAULT NULL,
   `usu_id` int(11) DEFAULT NULL,
   `gen_id` int(11) DEFAULT NULL
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `tbl_musica` (
 --
 
 INSERT INTO `tbl_musica` (`mus_id`, `mus_nom`, `mus_titol`, `usu_comptador`, `usu_id`, `gen_id`) VALUES
-(1, 'feelinggood', 'Feeling Good', NULL, 1, 1),
+(1, 'feelinggood', 'Feeling Good', 1, 1, 1),
 (2, 'heybaby', 'Hey Baby', NULL, 2, 1),
 (3, 'lifehappens', 'Life Happens', NULL, 3, 2),
 (4, 'urlove', 'Ur Love', NULL, 4, 2),
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `tbl_subscripcions` (
 `sub_id` int(11) NOT NULL,
   `usu_idorigen` int(11) DEFAULT NULL,
   `usu_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -270,10 +270,22 @@ INSERT INTO `tbl_usuari` (`usu_id`, `usu_mail`, `usu_contra`, `usu_nom`, `usu_av
 
 CREATE TABLE IF NOT EXISTS `tbl_valoracio` (
 `val_id` int(11) NOT NULL,
-  `val_puntuacio` varchar(3) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `val_puntuacio` int(3) DEFAULT NULL,
   `mus_id` int(11) DEFAULT NULL,
   `usu_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_valoracio`
+--
+
+INSERT INTO `tbl_valoracio` (`val_id`, `val_puntuacio`, `mus_id`, `usu_id`) VALUES
+(1, -1, 5, 35),
+(3, 1, 3, 35),
+(4, 1, 9, 35),
+(5, 1, 2, 35),
+(6, 1, 4, 35),
+(7, 1, 6, 35);
 
 --
 -- Índices para tablas volcadas
@@ -360,7 +372,7 @@ MODIFY `mus_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
 -- AUTO_INCREMENT de la tabla `tbl_subscripcions`
 --
 ALTER TABLE `tbl_subscripcions`
-MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `tbl_usuari`
 --
@@ -370,7 +382,7 @@ MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
 -- AUTO_INCREMENT de la tabla `tbl_valoracio`
 --
 ALTER TABLE `tbl_valoracio`
-MODIFY `val_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `val_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- Restricciones para tablas volcadas
 --
