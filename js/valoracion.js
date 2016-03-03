@@ -19,7 +19,7 @@
 			 
 
 			function suscriN(idval){
-				alert(idval);
+				//alert(idval);
 				ajax=objetoAjax();
 				ajax.open("POST", "procs/valoracion.proc.php",true);
 				ajax.onreadystatechange=function() {
@@ -31,7 +31,7 @@
 				ajax.send("idvalN="+idval);
 			}
 			function suscriM(idval){
-				alert(idval);
+				//alert(idval);
 				ajax=objetoAjax();
 				ajax.open("POST", "procs/valoracion.proc.php",true);
 				ajax.onreadystatechange=function() {
