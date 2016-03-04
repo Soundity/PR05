@@ -11,7 +11,6 @@ if($login == 1){
         $suscrito = mysqli_query($con, $seguir);
         $total="SELECT  COUNT(DISTINCT sub_id) AS contador FROM tbl_subscripcions WHERE usu_idorigen=$_REQUEST[iduser]";
         $totales= mysqli_query($con, $total);
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -44,22 +43,16 @@ if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
   return xmlhttp;
 }
  
-
 function suscri(idsub){
-
-
   ajax=objetoAjax();
  
  
   ajax.open("POST", "procs/subscripciones.proc.php",true);
-
   
   ajax.onreadystatechange=function() {
     
-
     if (ajax.readyState==4) {
       if (document.getElementById(idsub).className =="large empty star icon"){
-
       document.getElementById(idsub).className ="large star icon";
     }else{
       document.getElementById(idsub).className ="large empty star icon";
@@ -70,8 +63,6 @@ function suscri(idsub){
  
   ajax.send("idsub="+idsub);
 }
-
-
     </script>
 </head>
 <body>
@@ -79,13 +70,14 @@ function suscri(idsub){
     <div class="ui grid" id="personal">
         <?php
             $contador=0;
-            while($perfil = mysqli_fetch_array($datos)) {
-            ?>
+             ?>
                 <div class='nine wide centered column'>
                 <div class='ui red raised segment'>
                 <div class='ui horizontal divider'>
             <?php
-                
+            while($perfil = mysqli_fetch_array($datos)) {
+           
+                if ($contador==0){
                 if(mysqli_num_rows($suscrito)<=0){
                 echo utf8_encode("<h2>".$perfil['usu_nom']."<i id=$perfil[usu_id] class='large empty star icon' onclick='suscri($perfil[usu_id]);'></i></h2></div>");
                 
@@ -96,7 +88,7 @@ function suscri(idsub){
             $totalSuscrip = mysqli_fetch_array($totales);
                 
               
-                if ($contador==0){
+                
                     if(!empty($perfil['usu_avatar'])){
                         $fichero="media/images/avatares/$perfil[usu_avatar]";
                         echo"</br><img  class='ui small center left rounded floated image' src='$fichero'>";
@@ -106,7 +98,35 @@ function suscri(idsub){
                     echo "<h3 class='ui header'>" . utf8_encode($perfil['usu_descripcio']) . "</h3>";
                     echo "<h4 class='ui header'>" .$totalSuscrip['contador'] ." suscriptores </h4>";
             ?>
-                <section id="player" data-autoplay='1' data-loop='1'>
+              
+            <?php
+                    $contador=$contador+1;
+            }
+            echo "</br>";
+            if(isset($perfil['mus_titol'])){
+            ?>
+            </div>
+            <?php
+           
+                ?>
+        <article class="cancion" data-source="media/music/<?php echo $perfil['mus_nom'] ?>">
+        <?php 
+         
+          
+            echo $perfil['mus_titol']."   |   ".$perfil['usu_nom']; 
+           
+             
+            ?>
+
+        
+        <?php
+            }
+        }
+
+        ?>
+ </article> 
+    
+      <section id="player" data-autoplay='1' data-loop='1'>
                     <section id="controls">
                         <section id="songTitle">
                             <span>Selecciona una canción</span>
@@ -132,22 +152,6 @@ function suscri(idsub){
                     </section>
                     </section>
                 </section>
-            <?php
-                    $contador=$contador+1;
-            }
-            echo "</br>";
-            if(isset($perfil['mus_titol'])){
-            ?>
-        <article class="cancion" data-source="media/music/<?php echo $perfil['mus_nom'] ?>">
-        <p><?php 
-            echo $perfil['mus_titol']."   |   ".$perfil['usu_nom']; ?></p>
-        </article> 
-        <?php
-            }
-        }
-        ?>
-
-    </div>
 </body>
 </html>
 
@@ -178,14 +182,15 @@ function suscri(idsub){
     <div class="ui grid">
         <?php
             $contador=0;
-            while($perfil = mysqli_fetch_array($datos)) {
-                echo "<div class='four wide centered column'>";
+            echo "<div class='four wide centered column'>";
                 echo "<div class='ui red raised segment'>";
                 echo "<div class='ui horizontal divider'>";
+            while($perfil = mysqli_fetch_array($datos)) {
+                if ($contador==0){
                 echo utf8_encode("<h2>".$perfil['usu_nom']."</h2></div>");
                 $totalSuscrip = mysqli_fetch_array($totales);
                 
-                if ($contador==0){
+                
                     if(!empty($perfil['usu_avatar'])){
                         $fichero="media/images/avatares/$perfil[usu_avatar]";
                         echo"</br><img  class='ui small center left rounded floated image' src='$fichero'>";
@@ -196,6 +201,28 @@ function suscri(idsub){
                 echo "<h3 class='ui header'>" . utf8_encode($perfil['usu_descripcio']) . "</h3>";
                  echo "<h4 class='ui header'>" .$totalSuscrip['contador'] ." suscriptores </h4>";
         ?>
+    
+    <?php
+                $contador=$contador+1;
+                }
+                echo "</br>";
+                if(isset($perfil['mus_titol'])){
+    ?>
+    </div>
+    <article class="cancion" data-source="media/music/<?php echo $perfil['mus_nom'] ?>">
+        <?php 
+                echo "Nombre: ".$perfil['mus_titol']."   |   Autor: ".$perfil['usu_nom']; 
+                // AQUI ESTA EL HREF A ELIMINAR LA CANCION PROPIA DE UN USUARIO SUBIDA POR EL
+                 echo "<a href='procs/eliminar_cancion_propia.proc.php?mus_id=".$perfil['mus_id']."'> Eliminar </a>";
+            ?>
+        
+    </article>        
+    <?php
+                }
+            }
+    ?>
+
+    
     <section id="player" data-autoplay='1' data-loop='1'>
         <section id="controls">
             <section id="songTitle">
@@ -221,29 +248,6 @@ function suscri(idsub){
             </section>
        </section>
     </section>
-    <?php
-                $contador=$contador+1;
-                }
-                echo "</br>";
-                if(isset($perfil['mus_titol'])){
-    ?>
-    <article class="cancion" data-source="media/music/<?php echo $perfil['mus_nom'] ?>">
-        <p>
-            <?php 
-            echo "Nombre: ".$perfil['mus_titol']."   |   Autor: ".$perfil['usu_nom']; 
-            // AQUI ESTA EL HREF A ELIMINAR LA CANCION PROPIA DE UN USUARIO SUBIDA POR EL
-            $mus_id=$perfil['mus_id'];
-           ?>
-            <a href="procs/eliminar_cancion_propia.proc.php?mus_id=<?php echo $mus_id;?>" onClick ="return confirm('Seguro que deseas eliminar esta cancion?')"> Eliminar </a>
-            
-        </p>
-    </article>        
-    <?php
-                }
-            }
-    ?>
-
-    </div>
 </body>
 </html>
 <?php
