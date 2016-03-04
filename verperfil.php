@@ -229,7 +229,10 @@ function suscri(idsub){
     ?>
     <article class="cancion" data-source="media/music/<?php echo $perfil['mus_nom'] ?>">
         <p><?php 
-                echo "Nombre: ".$perfil['mus_titol']."   |   Autor: ".$perfil['usu_nom']; ?>
+                echo "Nombre: ".$perfil['mus_titol']."   |   Autor: ".$perfil['usu_nom']; 
+                // AQUI ESTA EL HREF A ELIMINAR LA CANCION PROPIA DE UN USUARIO SUBIDA POR EL
+                 echo "<a href='procs/eliminar_cancion_propia.proc.php?mus_id=".$perfil['mus_id']."'> Eliminar </a>";
+            ?>
         </p>
     </article>        
     <?php

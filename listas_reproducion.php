@@ -38,7 +38,9 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 						$llistanom = utf8_encode($send['lli_nom']);
 						$idllista = $send['lli_id'];
 						?>
-						<a href="lista.php?idllista=<?php echo $idllista;?>"><?php echo $llistanom;?></a></br>		
+						<a href="lista.php?idllista=<?php echo $idllista;?>"><?php echo $llistanom;?></a></br>--- 
+						<!-- ESTE DE AQUI DEBAJO ES EL HREF A ELIMINAR LISTA PROC, PASANDO EL ID LISTA -->
+						<a href="eliminar_lista.proc.php?idllista=<?php echo $idllista;?>">Eliminar lista</a></br></br>		
 					
 						<?php
 					}
