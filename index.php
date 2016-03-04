@@ -17,12 +17,57 @@ include('conexion.php');
         <link rel="stylesheet" type="text/css" href="css/styleRep1.css">
         <link rel="stylesheet" type="text/css" href="css/busqueda.css">
 		<link href="css/js-image-slider.css" rel="stylesheet" type="text/css" />
-		
+		<link rel="stylesheet" href="css/modal.css">
 		<script src="js/js-image-slider.js" type="text/javascript"></script>
         <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
         <script type="text/javascript" src="js/botonesReproductor1.js"></script>
 		<script type="text/javascript" src="js/valoracion.js"></script>
+
+		<script>
+			function objetoAjax(){
+  				var xmlhttp=false;
+  				try {
+    				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+  				} catch (e) {
+ 
+  					try {
+    					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  					} catch (E) {
+    					xmlhttp = false;
+  					}
+				}
+ 
+				if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+    				xmlhttp = new XMLHttpRequest();
+  				}
+  				return xmlhttp;
+			}
+
+			function pasarVariable(cancion){
+				document.getElementById("buscarBD").value=cancion;
+			}
+
+			function listaBD(id){
+				var lli_id=document.getElementById("listaFORM").value;
+				var mus_id=document.getElementById("buscarBD").value;
+				alert(lli_id);
+				alert(mus_id);
+					ajax=objetoAjax();
+					ajax.open("POST", "procs/AmusLista.proc.php?lli_id="+lli_id+"&mus_id="+mus_id,true);
+					ajax.onreadystatechange=function() {
+						if (ajax.readyState==4) {
+
+						}
+					}
+					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+					ajax.send(null);
+					alert("Cancion añadida correctamente");
+					window.locationf="busqueda.php";
+				}
+			
+		</script>
+
 	</head>
 
 	<body>
@@ -59,6 +104,57 @@ include('conexion.php');
 						
 						echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
 						echo utf8_encode("<h3>Autor: </h3><p>$pro1[usu_nom]</p>");
+						$valor=$pro1['mus_id'];
+?>
+
+						<h3>Añadir a mi lista <a href='#lista' onclick="pasarVariable(<?php echo $valor; ?>);">Clica aquí</a></h3>
+			<!-- SELECCIONAR LISTA / MODALBOX -->
+			<div id="lista" class="modalmask">
+				<div class="modalbox movedown" id="resultadoContent">
+				 	<?php
+	                	$sqlListas="SELECT COUNT(lli_id) AS total, usu_id, lli_id,lli_nom FROM tbl_llistes WHERE usu_id=$_SESSION[id] group by lli_id";
+						$listas = mysqli_query($con, $sqlListas);
+						if(mysqli_num_rows($listas)>0){
+							
+	                ?>
+	                <!-- Seleccionar lista -->
+
+					<form name="lista" action="#">
+						<label><input id="buscarBD" name="buscarBD" type="hidden" value="" /></label>
+						<label><input id="buscar" name="buscar" type="hidden" value="" /></label>
+            			<a href="#close" class="boxclose"><img src="media/images/close.png" alt=""></a>
+            			<h2 >Selecciona una lista</h2>
+            			<?php
+            				$filas=mysqli_num_rows($listas);
+            			?>
+            			<div id="contenidoListas">
+                			<select id="listaFORM" name="Listas">					
+								<?php						
+									echo $_REQUEST['idmusicaadd'];						
+									while($misListas=mysqli_fetch_array($listas)) {							
+										echo "<option value=\"$misListas[lli_id]\">$misListas[lli_nom]</option>";
+									}
+								?>
+							</select>
+							<input type="submit" onClick="listaBD()" class='ui orange button' value="Añadir">
+						</div>
+					</form>
+					<div>
+						<?php
+					}else{
+					?>
+					<div>
+						<a href="#close" class="boxclose"><img src="media/images/close.png" alt=""></a>
+						<?php
+								echo "No tienes ninguna lista:</br>";
+								echo "<a class='ui orange button' href=listas_reproducion.php>Crear nueva lista</a>";
+							}
+						?>
+    				</div>
+				</div>
+			</div>
+<?php
+
 						echo "<h3>Valoración: </h3><div class='ui label'>";
 						$usuari=$_SESSION['id'];
 						$sql2 = "Select * from tbl_valoracio where mus_id=$pro1[mus_id] & usu_id=$usuari";
