@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-03-2016 a las 13:02:07
+-- Tiempo de generación: 04-03-2016 a las 13:05:55
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.5.30
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bd_soundity`
 --
+CREATE DATABASE IF NOT EXISTS `bd_soundity` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `bd_soundity`;
 
 -- --------------------------------------------------------
 
