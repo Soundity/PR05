@@ -40,7 +40,7 @@ include('conexion.php');
 	<!-- CODI HTML DEL TOP 5-->
 	<div id="Top5">
 		<?php
-			$sql1 = "Select distinct tbl_genere.gen_nom, tbl_usuari.usu_nom, tbl_musica.mus_titol, tbl_musica.mus_nom, tbl_valoracio.mus_id, COUNT(tbl_valoracio.val_puntuacio) as 'totalvots' From tbl_musica inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id where tbl_valoracio.val_puntuacio=1 group by tbl_valoracio.mus_id order by totalvots desc limit 5";
+			$sql1 = "Select distinct tbl_genere.gen_nom, tbl_usuari.usu_nom, tbl_musica.mus_titol, tbl_musica.mus_nom, tbl_valoracio.mus_id, COUNT(tbl_valoracio.val_puntuacio) as 'totalvots' From tbl_musica inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id where tbl_valoracio.val_puntuacio=1 group by tbl_valoracio.mus_id limit 5";
 			$datos1 = mysqli_query($con, $sql1);
 			if(mysqli_num_rows($datos1)<=0){
 					echo "</br></br><div class='seven wide centered column'>";
@@ -95,7 +95,7 @@ include('conexion.php');
 			<?php
 			//tbl_genere.gen_nom, tbl_usuari.usu_nom, tbl_musica.mus_titol, tbl_musica.mus_nom, tbl_musica.usu_comptador
 				$id = $_SESSION['id'];
-				$sql0 = "SELECT * FROM tbl_genere_usuari inner join tbl_genere on tbl_genere_usuari.gen_id=tbl_genere.gen_id inner join tbl_musica on tbl_genere.gen_id=tbl_musica.gen_id inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id as idguai from tbl_valoracio group by 'idguai') as queryGen on tbl_musica.mus_id=queryGen.idguai WHERE tbl_genere_usuari.usu_id=$id";
+				$sql0 = "SELECT * FROM tbl_genere_usuari inner join tbl_genere on tbl_genere_usuari.gen_id=tbl_genere.gen_id inner join tbl_musica on tbl_genere.gen_id=tbl_musica.gen_id inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id from tbl_valoracio group by mus_id) as queryGen on tbl_musica.mus_id=queryGen.mus_id WHERE tbl_genere_usuari.usu_id=$id";
 				$datos0 = mysqli_query($con, $sql0);
 				if(mysqli_num_rows($datos0)<=0){
 					echo "</br></br><div class='seven wide centered column'>";
@@ -157,7 +157,7 @@ include('conexion.php');
 					</section>
 					<section id="playertrols">
 						<div id="plauseStop">
-							<div id="plause"><i class="play icon"></i></div>
+							<div id="plause"><i id="playPause" class="play icon"></i></div>
 							<div id="stop"><i class="stop icon"></i></div>
 						</div>
 						<div id="progressBar">
