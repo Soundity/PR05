@@ -164,3 +164,7 @@ i.inverted.bordered.icon, i.inverted.circular.icon{
 .ui.fixed.menu, .ui[class*="top fixed"].menu{
 	height: 100;
 }
+.nueva_lista{
+	margin-top: 1%;
+	margin-left: 40%;
+}
