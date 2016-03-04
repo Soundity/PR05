@@ -51,8 +51,8 @@ include('conexion.php');
 			function listaBD(id){
 				var lli_id=document.getElementById("listaFORM").value;
 				var mus_id=document.getElementById("buscarBD").value;
-				alert(lli_id);
-				alert(mus_id);
+				
+				
 					ajax=objetoAjax();
 					ajax.open("POST", "procs/AmusLista.proc.php?lli_id="+lli_id+"&mus_id="+mus_id,true);
 					ajax.onreadystatechange=function() {
