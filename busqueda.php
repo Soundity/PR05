@@ -49,7 +49,6 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 			function listaBD(id){
 				var lli_id=document.getElementById("listaFORM").value;
 				var mus_id=document.getElementById("buscarBD").value;
-					
 					ajax=objetoAjax();
 					ajax.open("POST", "procs/AmusLista.proc.php?lli_id="+lli_id+"&mus_id="+mus_id,true);
 					ajax.onreadystatechange=function() {
@@ -88,13 +87,13 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 					// CREAMOS CADA CANCION
 					while($pro1 = mysqli_fetch_array($datos1)) {
 						echo "<div class='six wide centered column'>";
-						echo "<div class='ui orange center aligned raised segment'>";
+						echo "<div id='generos' class='ui orange center aligned raised segment'>";
 						// TITULO CANCION
 						echo "<div class='ui horizontal divider'>";
 						echo utf8_encode("<h2>$pro1[mus_titol]</h2>");
 						echo "</div>";
 						// GENERO CANCION
-						echo "<div class='cancion' data-source='media/music/$pro1[mus_nom]'><i class='play icon'></i></div>";
+						echo "<div class='cancion' data-source='media/music/$pro1[mus_nom]'><i class='play icon'></i><p style='display:none'>Nombre: $pro1[mus_titol] | Genero: $pro1[gen_nom] </p></div>";
 						echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
 						$valor=$pro1['mus_id'];
 			?>
