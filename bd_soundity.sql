@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-03-2016 a las 18:30:27
--- Versión del servidor: 5.6.21
--- Versión de PHP: 5.5.19
+-- Tiempo de generación: 04-03-2016 a las 13:02:07
+-- Versión del servidor: 10.1.9-MariaDB
+-- Versión de PHP: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,13 +14,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `bd_soundity`
 --
-CREATE DATABASE IF NOT EXISTS `bd_soundity` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
-USE `bd_soundity`;
 
 -- --------------------------------------------------------
 
@@ -28,10 +26,10 @@ USE `bd_soundity`;
 -- Estructura de tabla para la tabla `tbl_genere`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_genere` (
-`gen_id` int(11) NOT NULL,
+CREATE TABLE `tbl_genere` (
+  `gen_id` int(11) NOT NULL,
   `gen_nom` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_genere`
@@ -60,20 +58,18 @@ INSERT INTO `tbl_genere` (`gen_id`, `gen_nom`) VALUES
 -- Estructura de tabla para la tabla `tbl_genere_usuari`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_genere_usuari` (
-`gus_id` int(11) NOT NULL,
+CREATE TABLE `tbl_genere_usuari` (
+  `gus_id` int(11) NOT NULL,
   `usu_id` int(11) DEFAULT NULL,
   `gen_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_genere_usuari`
 --
 
 INSERT INTO `tbl_genere_usuari` (`gus_id`, `usu_id`, `gen_id`) VALUES
-(1, 1, 1),
 (2, 2, 1),
-(3, 3, 2),
 (4, 4, 2),
 (5, 5, 3),
 (6, 6, 3),
@@ -106,7 +102,10 @@ INSERT INTO `tbl_genere_usuari` (`gus_id`, `usu_id`, `gen_id`) VALUES
 (33, 29, 14),
 (34, 30, 14),
 (35, 31, 15),
-(36, 32, 15);
+(36, 32, 15),
+(37, 39, 1),
+(48, 37, 1),
+(49, 37, 2);
 
 -- --------------------------------------------------------
 
@@ -114,11 +113,19 @@ INSERT INTO `tbl_genere_usuari` (`gus_id`, `usu_id`, `gen_id`) VALUES
 -- Estructura de tabla para la tabla `tbl_llistes`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_llistes` (
-`lli_id` int(11) NOT NULL,
+CREATE TABLE `tbl_llistes` (
+  `lli_id` int(11) NOT NULL,
   `lli_nom` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `usu_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_llistes`
+--
+
+INSERT INTO `tbl_llistes` (`lli_id`, `lli_nom`, `usu_id`) VALUES
+(1, 'Llista 1', 37),
+(2, 'Llista 2', 37);
 
 -- --------------------------------------------------------
 
@@ -126,11 +133,33 @@ CREATE TABLE IF NOT EXISTS `tbl_llistes` (
 -- Estructura de tabla para la tabla `tbl_llistes_musica`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_llistes_musica` (
-`lmu_id` int(11) NOT NULL,
+CREATE TABLE `tbl_llistes_musica` (
+  `lmu_id` int(11) NOT NULL,
   `lli_id` int(11) DEFAULT NULL,
   `mus_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_llistes_musica`
+--
+
+INSERT INTO `tbl_llistes_musica` (`lmu_id`, `lli_id`, `mus_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 2, 10),
+(7, 2, 11),
+(8, 2, 12),
+(9, 2, 13),
+(10, 2, 14),
+(11, 2, 1),
+(12, 1, 1),
+(13, 2, 1),
+(14, 1, 1),
+(15, 1, 32),
+(16, 1, 20);
 
 -- --------------------------------------------------------
 
@@ -138,21 +167,21 @@ CREATE TABLE IF NOT EXISTS `tbl_llistes_musica` (
 -- Estructura de tabla para la tabla `tbl_musica`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_musica` (
-`mus_id` int(11) NOT NULL,
+CREATE TABLE `tbl_musica` (
+  `mus_id` int(11) NOT NULL,
   `mus_nom` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `mus_titol` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `usu_comptador` int(11) DEFAULT NULL,
   `usu_id` int(11) DEFAULT NULL,
   `gen_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_musica`
 --
 
 INSERT INTO `tbl_musica` (`mus_id`, `mus_nom`, `mus_titol`, `usu_comptador`, `usu_id`, `gen_id`) VALUES
-(1, 'feelinggood', 'Feeling Good', 1, 1, 1),
+(1, 'feelinggood', 'Feeling Good', NULL, 1, 1),
 (2, 'heybaby', 'Hey Baby', NULL, 2, 1),
 (3, 'lifehappens', 'Life Happens', NULL, 3, 2),
 (4, 'urlove', 'Ur Love', NULL, 4, 2),
@@ -167,7 +196,7 @@ INSERT INTO `tbl_musica` (`mus_id`, `mus_nom`, `mus_titol`, `usu_comptador`, `us
 (13, 'adios', 'Adiós', NULL, 11, 5),
 (14, 'dontgonofurther', 'Don''t Go No Further', NULL, 12, 6),
 (15, 'dancemetotheendoflove', 'Dance Me to The End Of Love', NULL, 13, 6),
-(16, 'perfume', 'Perfume', NULL, 14, 7),
+(16, 'perfume', 'Perfume', NULL, 14, 1),
 (17, 'womanizer', 'Womanizer', NULL, 14, 7),
 (18, 'discosally', 'Disco Sally', NULL, 15, 7),
 (19, 'absolutamente', 'Absolutamente', NULL, 15, 7),
@@ -175,7 +204,7 @@ INSERT INTO `tbl_musica` (`mus_id`, `mus_nom`, `mus_titol`, `usu_comptador`, `us
 (21, 'afuego', 'A Fuego', NULL, 17, 8),
 (22, 'herbalist', 'Herbalist', NULL, 18, 9),
 (23, 'vibrapositiva', 'Vibra Positiva', NULL, 19, 9),
-(24, 'tooclose', 'Too Close', NULL, 20, 10),
+(24, 'tooclose', 'Too Close', NULL, 20, 1),
 (25, 'goodforyou', 'Good For You', NULL, 21, 10),
 (26, 'sitevas', 'Si Te Vas', NULL, 22, 11),
 (27, 'irresistible', 'Irresistible', NULL, 23, 11),
@@ -195,11 +224,19 @@ INSERT INTO `tbl_musica` (`mus_id`, `mus_nom`, `mus_titol`, `usu_comptador`, `us
 -- Estructura de tabla para la tabla `tbl_subscripcions`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_subscripcions` (
-`sub_id` int(11) NOT NULL,
+CREATE TABLE `tbl_subscripcions` (
+  `sub_id` int(11) NOT NULL,
   `usu_idorigen` int(11) DEFAULT NULL,
   `usu_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_subscripcions`
+--
+
+INSERT INTO `tbl_subscripcions` (`sub_id`, `usu_idorigen`, `usu_id`) VALUES
+(10, 1, 37),
+(12, 2, 37);
 
 -- --------------------------------------------------------
 
@@ -207,8 +244,8 @@ CREATE TABLE IF NOT EXISTS `tbl_subscripcions` (
 -- Estructura de tabla para la tabla `tbl_usuari`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_usuari` (
-`usu_id` int(11) NOT NULL,
+CREATE TABLE `tbl_usuari` (
+  `usu_id` int(11) NOT NULL,
   `usu_mail` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `usu_contra` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `usu_nom` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -216,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `tbl_usuari` (
   `usu_descripcio` varchar(250) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `usu_rang` tinyint(1) DEFAULT NULL,
   `usu_idioma` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_usuari`
@@ -233,12 +270,12 @@ INSERT INTO `tbl_usuari` (`usu_id`, `usu_mail`, `usu_contra`, `usu_nom`, `usu_av
 (8, 'zedd_ddez@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Zedd', 'zedd.jpg', 'Músico, disc jockey y productor ruso-alemán, orientado al electro house', 0, 'Inglés'),
 (9, 'shw05@hotmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Swedish House Mafia', 'shw.jpg', 'Grupo de músicos, DJ''s y productores musicales suecos.', 0, 'Inglés'),
 (10, 'florence_welch@hotmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Florence Welch', 'florence.jpg', 'Cantante y compositora de Indie Británico.', 0, 'Inglés'),
-(11, 'full_sevilla@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Full', 'full.jpg', 'Grupo Indie-Pop provinitentes de Sevilla', 0, 'Español'),
+(11, 'full_sevilla@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Full', '', 'Grupo Indie-Pop provinitentes de Sevilla', 0, 'Español'),
 (12, 'ster_wax@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Ster Wax', 'ster.jpg', 'Banda de Jazz&Bles de Barcelona.', 0, 'Inglés'),
 (13, 'madeleine_Pe@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Madeleine Peyroux', 'madeleine.jpg', 'Cantante, guitarrista y compositora estadounidense de Jazz.', 0, 'Inglés'),
 (14, 'bs_81@hotmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Britney Spears', 'brit.jpg', 'Cantante, bailarina y compositora Estadounidense', 0, 'Inglés'),
 (15, 'fagoria_91@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Fangoria', 'fangoria.jpg', 'Grupo de pop electrónico Español.', 0, 'Español'),
-(16, 'zatu_esp@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '', 'zatu.jpg', 'Rapero español', 0, 'Español'),
+(16, 'zatu_esp@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Zatu', 'zatu.jpg', 'Rapero español', 0, 'Español'),
 (17, 'rapsusklei@hotmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Rapsusklei', 'rapsuklei.jpg', 'Rapero español', 0, 'Español'),
 (18, 'alborosie_77@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Alborosie', 'alborosie.jpg', 'Cantante Italiano de Reggae', 0, 'Inglés'),
 (19, 'zona_ganjah@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Zona Ganjah', 'ganjah.jpg', 'Agrupación musical chilena de reggea', 0, 'Español'),
@@ -259,8 +296,9 @@ INSERT INTO `tbl_usuari` (`usu_id`, `usu_mail`, `usu_contra`, `usu_nom`, `usu_av
 (34, 'sergio_ayala@fje.edu', '81dc9bdb52d04dc20036dbd8313ed055', 'Sergio Ayala', 'sergio.jpg', 'Administrador', 1, 'Español'),
 (35, 'aitor_blesa@fje.edu', '81dc9bdb52d04dc20036dbd8313ed055', 'Aitor Blesa', 'aitor.jpg', 'Administrador', 1, 'Español'),
 (36, 'victor_cruz@fje.edu', '81dc9bdb52d04dc20036dbd8313ed055', 'Víctor Cruz', 'victor.jpg', 'Administrador', 1, 'Español'),
-(37, 'enric_gorriz@fje.edu', '81dc9bdb52d04dc20036dbd8313ed055', 'Enric Górriz', 'enric.jpg', 'Administrador', 1, 'Español'),
-(38, 'xavier_granell@fje.edu', '81dc9bdb52d04dc20036dbd8313ed055', 'Xavier Granell', 'xavi.jpg', 'Administrador', 1, 'Español');
+(37, 'enric_gorriz@fje.edu', '81dc9bdb52d04dc20036dbd8313ed055', 'Enric Górriz', '37_logo.jpg', 'Administrador', 1, 'Català'),
+(38, 'xavier_granell@fje.edu', '81dc9bdb52d04dc20036dbd8313ed055', 'Xavier Granell', 'xavi.jpg', 'Administrador', 1, 'Español'),
+(39, 'pepin@java.com', '81dc9bdb52d04dc20036dbd8313ed055', 'pepin', NULL, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -268,24 +306,38 @@ INSERT INTO `tbl_usuari` (`usu_id`, `usu_mail`, `usu_contra`, `usu_nom`, `usu_av
 -- Estructura de tabla para la tabla `tbl_valoracio`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_valoracio` (
-`val_id` int(11) NOT NULL,
+CREATE TABLE `tbl_valoracio` (
+  `val_id` int(11) NOT NULL,
   `val_puntuacio` int(3) DEFAULT NULL,
   `mus_id` int(11) DEFAULT NULL,
   `usu_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_valoracio`
 --
 
 INSERT INTO `tbl_valoracio` (`val_id`, `val_puntuacio`, `mus_id`, `usu_id`) VALUES
-(1, -1, 5, 35),
-(3, 1, 3, 35),
-(4, 1, 9, 35),
-(5, 1, 2, 35),
-(6, 1, 4, 35),
-(7, 1, 6, 35);
+(1, 1, 1, 1),
+(2, 1, 1, 2),
+(3, 1, 1, 3),
+(4, -1, 2, 4),
+(5, -1, 2, 5),
+(6, 1, 3, 6),
+(7, 1, 3, 7),
+(8, 1, 4, 8),
+(9, 1, 5, 9),
+(10, 1, 4, 10),
+(11, 1, 6, 1),
+(12, 1, 7, 1),
+(13, -1, 1, 18),
+(14, 1, 18, 1),
+(15, 1, 19, 1),
+(20, 1, 1, 37),
+(22, 1, 16, 37),
+(23, 1, 24, 37),
+(24, 1, 4, 37),
+(25, 1, 32, 37);
 
 --
 -- Índices para tablas volcadas
@@ -295,49 +347,60 @@ INSERT INTO `tbl_valoracio` (`val_id`, `val_puntuacio`, `mus_id`, `usu_id`) VALU
 -- Indices de la tabla `tbl_genere`
 --
 ALTER TABLE `tbl_genere`
- ADD PRIMARY KEY (`gen_id`);
+  ADD PRIMARY KEY (`gen_id`);
 
 --
 -- Indices de la tabla `tbl_genere_usuari`
 --
 ALTER TABLE `tbl_genere_usuari`
- ADD PRIMARY KEY (`gus_id`), ADD KEY `usu_id` (`usu_id`), ADD KEY `gen_id` (`gen_id`);
+  ADD PRIMARY KEY (`gus_id`),
+  ADD KEY `usu_id` (`usu_id`),
+  ADD KEY `gen_id` (`gen_id`);
 
 --
 -- Indices de la tabla `tbl_llistes`
 --
 ALTER TABLE `tbl_llistes`
- ADD PRIMARY KEY (`lli_id`), ADD KEY `usu_id` (`usu_id`);
+  ADD PRIMARY KEY (`lli_id`),
+  ADD KEY `usu_id` (`usu_id`);
 
 --
 -- Indices de la tabla `tbl_llistes_musica`
 --
 ALTER TABLE `tbl_llistes_musica`
- ADD PRIMARY KEY (`lmu_id`), ADD KEY `mus_id` (`mus_id`), ADD KEY `lli_id` (`lli_id`);
+  ADD PRIMARY KEY (`lmu_id`),
+  ADD KEY `mus_id` (`mus_id`),
+  ADD KEY `lli_id` (`lli_id`);
 
 --
 -- Indices de la tabla `tbl_musica`
 --
 ALTER TABLE `tbl_musica`
- ADD PRIMARY KEY (`mus_id`), ADD KEY `usu_id` (`usu_id`), ADD KEY `gen_id` (`gen_id`);
+  ADD PRIMARY KEY (`mus_id`),
+  ADD KEY `usu_id` (`usu_id`),
+  ADD KEY `gen_id` (`gen_id`);
 
 --
 -- Indices de la tabla `tbl_subscripcions`
 --
 ALTER TABLE `tbl_subscripcions`
- ADD PRIMARY KEY (`sub_id`), ADD KEY `usu_id` (`usu_id`), ADD KEY `usu_idorigen` (`usu_idorigen`);
+  ADD PRIMARY KEY (`sub_id`),
+  ADD KEY `usu_id` (`usu_id`),
+  ADD KEY `usu_idorigen` (`usu_idorigen`);
 
 --
 -- Indices de la tabla `tbl_usuari`
 --
 ALTER TABLE `tbl_usuari`
- ADD PRIMARY KEY (`usu_id`);
+  ADD PRIMARY KEY (`usu_id`);
 
 --
 -- Indices de la tabla `tbl_valoracio`
 --
 ALTER TABLE `tbl_valoracio`
- ADD PRIMARY KEY (`val_id`), ADD KEY `usu_id` (`usu_id`), ADD KEY `mus_id` (`mus_id`);
+  ADD PRIMARY KEY (`val_id`),
+  ADD KEY `usu_id` (`usu_id`),
+  ADD KEY `mus_id` (`mus_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -347,42 +410,42 @@ ALTER TABLE `tbl_valoracio`
 -- AUTO_INCREMENT de la tabla `tbl_genere`
 --
 ALTER TABLE `tbl_genere`
-MODIFY `gen_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `tbl_genere_usuari`
 --
 ALTER TABLE `tbl_genere_usuari`
-MODIFY `gus_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+  MODIFY `gus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT de la tabla `tbl_llistes`
 --
 ALTER TABLE `tbl_llistes`
-MODIFY `lli_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lli_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tbl_llistes_musica`
 --
 ALTER TABLE `tbl_llistes_musica`
-MODIFY `lmu_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lmu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `tbl_musica`
 --
 ALTER TABLE `tbl_musica`
-MODIFY `mus_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+  MODIFY `mus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT de la tabla `tbl_subscripcions`
 --
 ALTER TABLE `tbl_subscripcions`
-MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `tbl_usuari`
 --
 ALTER TABLE `tbl_usuari`
-MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
+  MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT de la tabla `tbl_valoracio`
 --
 ALTER TABLE `tbl_valoracio`
-MODIFY `val_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `val_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- Restricciones para tablas volcadas
 --
@@ -391,42 +454,42 @@ MODIFY `val_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- Filtros para la tabla `tbl_genere_usuari`
 --
 ALTER TABLE `tbl_genere_usuari`
-ADD CONSTRAINT `tbl_genere_usuari_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `tbl_usuari` (`usu_id`),
-ADD CONSTRAINT `tbl_genere_usuari_ibfk_2` FOREIGN KEY (`gen_id`) REFERENCES `tbl_genere` (`gen_id`);
+  ADD CONSTRAINT `tbl_genere_usuari_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `tbl_usuari` (`usu_id`),
+  ADD CONSTRAINT `tbl_genere_usuari_ibfk_2` FOREIGN KEY (`gen_id`) REFERENCES `tbl_genere` (`gen_id`);
 
 --
 -- Filtros para la tabla `tbl_llistes`
 --
 ALTER TABLE `tbl_llistes`
-ADD CONSTRAINT `tbl_llistes_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `tbl_usuari` (`usu_id`);
+  ADD CONSTRAINT `tbl_llistes_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `tbl_usuari` (`usu_id`);
 
 --
 -- Filtros para la tabla `tbl_llistes_musica`
 --
 ALTER TABLE `tbl_llistes_musica`
-ADD CONSTRAINT `tbl_llistes_musica_ibfk_1` FOREIGN KEY (`mus_id`) REFERENCES `tbl_musica` (`mus_id`),
-ADD CONSTRAINT `tbl_llistes_musica_ibfk_2` FOREIGN KEY (`lli_id`) REFERENCES `tbl_llistes` (`lli_id`);
+  ADD CONSTRAINT `tbl_llistes_musica_ibfk_1` FOREIGN KEY (`mus_id`) REFERENCES `tbl_musica` (`mus_id`),
+  ADD CONSTRAINT `tbl_llistes_musica_ibfk_2` FOREIGN KEY (`lli_id`) REFERENCES `tbl_llistes` (`lli_id`);
 
 --
 -- Filtros para la tabla `tbl_musica`
 --
 ALTER TABLE `tbl_musica`
-ADD CONSTRAINT `tbl_musica_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `tbl_usuari` (`usu_id`),
-ADD CONSTRAINT `tbl_musica_ibfk_2` FOREIGN KEY (`gen_id`) REFERENCES `tbl_genere` (`gen_id`);
+  ADD CONSTRAINT `tbl_musica_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `tbl_usuari` (`usu_id`),
+  ADD CONSTRAINT `tbl_musica_ibfk_2` FOREIGN KEY (`gen_id`) REFERENCES `tbl_genere` (`gen_id`);
 
 --
 -- Filtros para la tabla `tbl_subscripcions`
 --
 ALTER TABLE `tbl_subscripcions`
-ADD CONSTRAINT `tbl_subscripcions_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `tbl_usuari` (`usu_id`),
-ADD CONSTRAINT `tbl_subscripcions_ibfk_2` FOREIGN KEY (`usu_idorigen`) REFERENCES `tbl_usuari` (`usu_id`);
+  ADD CONSTRAINT `tbl_subscripcions_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `tbl_usuari` (`usu_id`),
+  ADD CONSTRAINT `tbl_subscripcions_ibfk_2` FOREIGN KEY (`usu_idorigen`) REFERENCES `tbl_usuari` (`usu_id`);
 
 --
 -- Filtros para la tabla `tbl_valoracio`
 --
 ALTER TABLE `tbl_valoracio`
-ADD CONSTRAINT `tbl_valoracio_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `tbl_usuari` (`usu_id`),
-ADD CONSTRAINT `tbl_valoracio_ibfk_2` FOREIGN KEY (`mus_id`) REFERENCES `tbl_musica` (`mus_id`);
+  ADD CONSTRAINT `tbl_valoracio_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `tbl_usuari` (`usu_id`),
+  ADD CONSTRAINT `tbl_valoracio_ibfk_2` FOREIGN KEY (`mus_id`) REFERENCES `tbl_musica` (`mus_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
