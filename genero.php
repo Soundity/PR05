@@ -36,13 +36,11 @@
 				return xmlhttp;
 			}
 			function pasarVariable(cancion){
-				document.getElementById("buscar").value=cancion;
+				document.getElementById("genero").value=cancion;
 			}
 			function listaBD(id){
 				var lli_id=document.getElementById("listaFORM").value;
-				var mus_id=document.getElementById("buscar").value;
-					alert(lli_id);
-					alert(mus_id);
+				var mus_id=document.getElementById("genero").value;
 					ajax=objetoAjax();
 					ajax.open("POST", "procs/AmusLista.proc.php?lli_id="+lli_id+"&mus_id="+mus_id,true);
 					ajax.onreadystatechange=function() {
@@ -52,7 +50,7 @@
 					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 					ajax.send(null);
 					alert("Cancion añadida correctamente");
-					window.location.href = "busqueda.php?buscar=";
+					
 			}
 		</script>
 	</head>
@@ -110,10 +108,13 @@
 							$sqlListas="SELECT COUNT(lli_id) AS total, usu_id, lli_id,lli_nom FROM tbl_llistes WHERE usu_id=$_SESSION[id] group by lli_id";
 							$listas = mysqli_query($con, $sqlListas);
 							if(mysqli_num_rows($listas)>0){
+								
 						?>
 						<!-- Seleccionar lista -->
 						<form name="lista" action="#">
-							<label><input id="buscar" name="buscar" type="hidden" value="" /></label>
+							<label><input id="genero" name="musica" type="hidden" value="" /></label>
+							<label><input id="gen" name="gen" type="hidden" value="<?php echo $_REQUEST['gen'];?>" /></label>
+							<label><input id="nom-genere" name="genNom" type="hidden" value="<?php echo $_REQUEST['genNom'];?>" /></label>
 							<a href="#close" class="boxclose"><img src="media/images/close.png" alt=""></a>
 							<h2 >Selecciona una lista</h2>
 							<?php
