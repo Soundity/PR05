@@ -88,29 +88,29 @@ include('conexion.php');
 				$sql1 = "Select distinct tbl_genere.gen_nom, tbl_usuari.usu_nom, tbl_musica.mus_titol, tbl_musica.mus_nom, tbl_valoracio.mus_id, COUNT(tbl_valoracio.val_puntuacio) as 'totalvots' From tbl_musica inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id where tbl_valoracio.val_puntuacio=1 group by tbl_valoracio.mus_id limit 5";
 				$datos1 = mysqli_query($con, $sql1);
 				if(mysqli_num_rows($datos1)<=0){
-						echo "</br></br><div class='seven wide centered column'>";
-						echo "<div class='ui horizontal divider'>";
-						echo "";
-						echo "</div></div>";
-					}else{
-						echo "</br><div class='twelve wide centered column'><div class='ui horizontal divider'>";
-						echo "<h2>TOP 5</h2></div></div><div class='ui two column centered grid'>";
-						while($pro1 = mysqli_fetch_array($datos1)) {
-							echo "<div class='six wide centered column'>";?>
-								<article id="generos" >
-									<div class='cancion2'>
-									<?php
-									echo "<div class='ui orange center aligned raised segment'>";
-							echo "<div class='ui horizontal divider'>";
-							echo utf8_encode("<h2>$pro1[mus_titol] </h2>");
-							echo "</div><div class='cancion' data-source='media/music/$pro1[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$pro1['mus_titol']."   |   Genero: ".$pro1['gen_nom']. " </p></div>";
+					echo "<div class='seven wide centered column'>";
+					echo "<div class='ui horizontal divider'>";
+					echo "";
+					echo "</div></div>";
+				}else{
+					echo "</br><div class='twelve wide centered column'><div class='ui horizontal divider'>";
+					echo "<h2>TOP 5</h2></div></div>";
+				?>
+					<div class="ui grid">
+				<?php
+					while($pro1 = mysqli_fetch_array($datos1)) {
+						?>
+  						<div class="three wide column">
+   							<div class="ui raised center aligned segment">
+      							<?php
+								echo utf8_encode("<h2>$pro1[mus_titol] </h2>");
+								echo "<div class='cancion' data-source='media/music/$pro1[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$pro1['mus_titol']."   |   Genero: ".$pro1['gen_nom']. " </p></div>";
 							
-							echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
-							echo utf8_encode("<h3>Autor: </h3><p>$pro1[usu_nom]</p>");
-							$valor=$pro1['mus_id'];
-		?>
-
-							<h3>Añadir a mi lista <a href='#lista' onclick="pasarVariable(<?php echo $valor; ?>);">Clica aquí</a></h3>
+								echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
+								echo utf8_encode("<h3>Autor: </h3><p>$pro1[usu_nom]</p>");
+								$valor=$pro1['mus_id'];
+						?>
+							<h3><a href='#lista' onclick="pasarVariable(<?php echo $valor; ?>);">Añadir a mi lista</a></h3>
 				
 		<?php
 
@@ -139,75 +139,96 @@ include('conexion.php');
 									}
 								}
 							}
-							echo "</div></div></div></article></div>";
+							?>
+							</div>
+						</div>
+					</div>
+							<?php
 						}
-						echo "</div>";
+					
 					}
 			?>
 		</div>
 	<!-- CODI HTML DELS GENERES PREFERITS-->	
-		<div id="generesPreferits">
+	
+			<div id="Top5">
 			<?php
-			//tbl_genere.gen_nom, tbl_usuari.usu_nom, tbl_musica.mus_titol, tbl_musica.mus_nom, tbl_musica.usu_comptador
 				$id = $_SESSION['id'];
-				$sql0 = "SELECT * FROM tbl_genere_usuari inner join tbl_genere on tbl_genere_usuari.gen_id=tbl_genere.gen_id inner join tbl_musica on tbl_genere.gen_id=tbl_musica.gen_id inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id from tbl_valoracio group by mus_id) as queryGen on tbl_musica.mus_id=queryGen.mus_id WHERE tbl_genere_usuari.usu_id=$id";
+				$sql0 = "SELECT tbl_genere.gen_nom, tbl_musica.mus_id, tbl_musica.mus_nom,tbl_musica.mus_titol, totalvots, tbl_musica.usu_id, tbl_usuari.usu_nom FROM tbl_genere_usuari inner join tbl_genere on tbl_genere_usuari.gen_id=tbl_genere.gen_id inner join tbl_musica on tbl_genere.gen_id=tbl_musica.gen_id inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id from tbl_valoracio group by mus_id) as queryGen on tbl_musica.mus_id=queryGen.mus_id WHERE tbl_genere_usuari.usu_id=$id";
 				$datos0 = mysqli_query($con, $sql0);
 				if(mysqli_num_rows($datos0)<=0){
-					echo "</br></br><div class='seven wide centered column'>";
+					echo "<div class='seven wide centered column'>";
 					echo "<div class='ui horizontal divider'>";
 					echo "";
 					echo "</div></div>";
 				}else{
 					echo "</br><div class='twelve wide centered column'><div class='ui horizontal divider'>";
-					echo "<h2>Genero Favorito</h2></div></div><div class='ui two column centered grid'>";
+					echo "<h2>Generos Favoritos</h2></div></div>";
 					$genere="hola";
+				?>
+					<div class="ui grid">
+				<?php
 					while($pro0 = mysqli_fetch_array($datos0)) {
 						if($genere != utf8_encode($pro0['gen_nom'])){
 							$genere = utf8_encode($pro0['gen_nom']);
-							echo "<div class='twelve wide centered column'><div class='ui horizontal divider'><h3>".$genere."</h3></div></div>";
+							echo "<div class='twelve wide centered column'>
+									<div class='ui horizontal divider'>
+										<h3>".$genere."</h3>
+									</div>
+								  </div>";
 						}
-						echo "<div class='six wide centered column'>";
 						?>
-							<article id="generos" >
-								<div class='cancion2'>
-								<?php
-								echo "<div class='ui orange center aligned raised segment'>";
-						echo "<div class='ui horizontal divider'>";
-						echo utf8_encode("<h2>$pro0[mus_titol] </h2>");
-						echo "</div><div class='cancion' data-source='media/music/$pro0[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$pro0['mus_titol']."   |   Genero: ".$pro0['gen_nom']. " </p></div>";
-						
-						echo "<h3>Género: </h3><p>$pro0[gen_nom] </p>";
-						echo utf8_encode("<h3>Autor: </h3><p>$pro0[usu_nom] </p>");
-						echo "<h3>Valoración: </h3><div class='ui label'>";
-						$usuari=$_SESSION['id'];
-						$sql2 = "Select * from tbl_valoracio where mus_id=$pro0[mus_id] & usu_id=$usuari";
-						$datos2 = mysqli_query($con, $sql2);
-						if(mysqli_num_rows($datos2)==0){
-							// POTS VOTAR
-							echo"<i id=$pro0[mus_id] class=' thumbs outline up icon' onclick='suscriM($pro0[mus_id]);'></i>";
-							echo"<i id=$pro0[mus_id] class=' thumbs outline down icon' onclick='suscriN($pro0[mus_id]);'></i>";
-							if ($pro0['totalvots']!=0){
-								echo $pro0['totalvots']. " Votos";
-							} else {
-								echo "0 Votos";
-							}
-						}else{
-							// JA HAS VOTAR 
-							while($pro2 = mysqli_fetch_array($datos2)) {	
-								if ($pro2['val_puntuacio']==1){
-									echo"<i id=$pro0[mus_id] class=' thumbs outline down icon' onclick='suscriN($pro0[mus_id]);'></i>$pro0[totalvots] Te Gusta ";
+  						<div class="six wide column">
+   							<div class="ui piled center aligned segment">
+      							<?php
+								echo utf8_encode("<h2>$pro0[mus_titol] </h2>");
+								echo "<div class='cancion' data-source='media/music/$pro0[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$pro1['mus_titol']."   |   Genero: ".$pro1['gen_nom']. " </p></div>";
+							
+								echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
+								echo utf8_encode("<h3>Autor: </h3><p>$pro0[usu_nom]</p>");
+								$valor=$pro0['mus_id'];
+						?>
+							<h3><a href='#lista' onclick="pasarVariable(<?php echo $valor; ?>);">Añadir a mi lista</a></h3>
+				
+		<?php
+
+							echo "<h3>Valoración: </h3><div class='ui label'>";
+							$usuari=$_SESSION['id'];
+							$sql2 = "Select * from tbl_valoracio where mus_id=$pro0[mus_id] & usu_id=$usuari";
+							//echo $sql2;
+							$datos2 = mysqli_query($con, $sql2);
+							if(mysqli_num_rows($datos2)==0){
+								// POTS VOTAR
+								echo"<i id=$pro0[mus_id] class=' thumbs outline up icon' onclick='suscriM($pro0[mus_id]);'></i>";
+								echo"<i id=$pro0[mus_id] class=' thumbs outline down icon' onclick='suscriN($pro0[mus_id]);'></i>";
+								if ($pro1['totalvots']!=0){
+									echo $pro0['totalvots']. " Votos";
 								} else {
-									echo"<i id=$pro1[mus_id] class=' thumbs outline up icon' onclick='suscriM($pro0[mus_id]);'></i>$pro0[totalvots] Ya no te gusta ";
-									
+									echo "0 Votos";
+								}
+							}else{
+								// JA HAS VOTAR 
+								while($pro2 = mysqli_fetch_array($datos2)) {	
+									if ($pro2['val_puntuacio']==1){
+										echo"<i id=$pro1[mus_id] class=' thumbs outline down icon' onclick='suscriN($pro1[mus_id]);'></i>$pro0[totalvots] Te Gusta ";
+									} else {
+										echo"<i id=$pro0[mus_id] class=' thumbs outline up icon' onclick='suscriM($pro0[mus_id]);'></i>$pro0[totalvots] Ya no te gusta ";
+										
+									}
 								}
 							}
+							?>
+							</div>
+						</div>
+					</div>
+							<?php
 						}
-						echo "</div></div></article></div>";
+					
 					}
-					echo "</div></div>";
-				}
 			?>
 		</div>
+		
+
 		<!-- CODI HTML DEL REPRODUCTOR -->
 			<section id="player" data-autoplay='1' data-loop='1'>
 				<section id="controls">
@@ -266,8 +287,8 @@ include('conexion.php');
 					</div>
 				</form>
 				<div>
-						<?php
-					}else{
+					<?php
+						}else{
 					?>
 					<div>
 						<a href="#close" class="boxclose"><img src="media/images/close.png" alt=""></a>
@@ -280,6 +301,7 @@ include('conexion.php');
 				</div>
 			</div>
 		</div>
+		<footer></footer>
 	</body>
 </html>
 <?php

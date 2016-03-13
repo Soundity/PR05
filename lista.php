@@ -13,6 +13,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 		<title>Soundity</title>
 		<link rel="stylesheet" type="text/css" href="css/styleRep1.css">
 		<link rel="stylesheet" type="text/css" href="css/generos.css">
+
 		<link href="css/listas_reproducion.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     	<script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
@@ -26,7 +27,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 				include('conexion.php');
 				$user = $_SESSION['id'];
 				$llista = $_REQUEST['idllista'];
-				$sql = "SELECT tbl_musica.mus_id, tbl_musica.mus_nom, tbl_musica.mus_titol, tbl_usuari.usu_nom, tbl_llistes_musica.lmu_id, tbl_genere.gen_nom, tbl_llistes.lli_id, tbl_llistes.lli_nom, totalvots FROM tbl_usuari inner join tbl_llistes on tbl_usuari.usu_id=tbl_llistes.usu_id inner join tbl_llistes_musica on tbl_llistes.lli_id=tbl_llistes_musica.lli_id inner join tbl_musica on tbl_llistes_musica.mus_id=tbl_musica.mus_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id from tbl_valoracio group by mus_id) as queryGen on tbl_musica.mus_id=queryGen.mus_id where tbl_llistes.lli_id=".$llista;
+				$sql = "SELECT tbl_musica.mus_id, tbl_musica.mus_nom, tbl_musica.mus_titol, tbl_usuari.usu_nom, tbl_genere.gen_nom, tbl_llistes.lli_nom, totalvots FROM tbl_usuari inner join tbl_llistes on tbl_usuari.usu_id=tbl_llistes.usu_id inner join tbl_llistes_musica on tbl_llistes.lli_id=tbl_llistes_musica.lli_id inner join tbl_musica on tbl_llistes_musica.mus_id=tbl_musica.mus_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id from tbl_valoracio group by mus_id) as queryGen on tbl_musica.mus_id=queryGen.mus_id where tbl_llistes.lli_id=".$llista;
 				$datos = mysqli_query ($con, $sql);
 				if(mysqli_num_rows($datos)>0){
 					$llistanom="hola";
@@ -39,7 +40,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 						}
 						?>
 						<article class="cancion" data-source="media/music/<?php echo $send['mus_nom'] ?>">
-							<p><?php echo utf8_encode("Nombre: ".$send['mus_titol']."   |   Genero: ".$send['gen_nom']. "   |    Valoraci贸n: "); 
+							<p><?php echo utf8_encode("Nombre: ".$send['mus_titol']."   |   Genero: ".$send['gen_nom']. "   |    Valoraci髇: "); 
 							$usuari=$_SESSION['id'];
 						$sql2 = "Select * from tbl_valoracio where mus_id=$send[mus_id] AND usu_id=$usuari";
 						//echo $sql2;
@@ -63,9 +64,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 									
 								}
 							}
-						}?>
-						<a href="procs/eliminar_cancion_lista.proc.php?idllista=<?php echo $send['lli_id']?>&lmu_id=<?php echo $send['lmu_id'];?>" onClick="return confirm('Seguro que deseas eliminar esta cancion de la lista de reproducci贸n?')">Eliminar cancion de la lista.</a>
-						</p>
+						}?></p>
 						</article>
 					<?php
 					}
@@ -74,7 +73,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 					<section id="player" data-autoplay='1' data-loop='1'>
                     <section id="controls">
                         <section id="songTitle">
-                            <span><?php echo utf8_encode("Selecciona una canci贸n"); ?></span>
+                            <span><?php echo utf8_encode("Selecciona una canci髇");?></span>
                         </section>
                         <section id="playertrols">
                             <div id="plauseStop">
@@ -101,7 +100,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
                 </section>
                 <?php
 				}else{
-					echo "No hay listas de reproduci贸n creadas.";
+					echo "No hay listas de reproduci髇 creadas.";
 				}	
 			?>
 		</div>

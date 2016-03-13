@@ -4,10 +4,6 @@ body{
 	overflow-x: hidden;
 }
 
-.ui.grid{
-	width: 70%;
-	
-}
 .ui.raised.segment, .ui.raised.segments´{
 	margin-top: 10%;
 }

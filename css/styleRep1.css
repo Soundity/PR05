@@ -10,7 +10,7 @@
 }
 
 #controls{
-    background: rgba(56,56,56,0.5);
+    background: #808080;
    /* border-radius: 1em 1em 0 0;*/
     height: 6em;
     margin: 0 auto;
@@ -182,6 +182,7 @@ input[type=range]{
     position: relative;
     width: 50%;
     border-radius: 5px;
+    margin-left: -15%;
 }
 
 .handle{

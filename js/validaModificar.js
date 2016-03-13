@@ -16,7 +16,7 @@ var validaFormulario=function(){
     document.getElementById("error_correo_vacio").style.display = "block";
     document.getElementById("error_correo_vacio").innerHTML='Debe introducir una dirección email.';
     devolver = false;
-  }else if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+  }else if(!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)){
     document.getElementById("error_correo_vacio").style.display = "none";
      document.getElementById("error_correo_formato").style.display = "block";
     document.getElementById("error_correo_formato").innerHTML='El formato de dirección es incorrecto.';

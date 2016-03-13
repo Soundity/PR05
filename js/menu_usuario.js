@@ -3,7 +3,7 @@ $(document).ready(main);
 var contador = 1;
 
 function main(){
-	$('.small.user.icon').click(function(){
+	$('.large.user.icon').click(function(){
 		//$('nav').toggle(); 
 		if(contador == 1){
 			$('.desplegable').animate({
@@ -19,9 +19,6 @@ function main(){
 				duration: 1000
 			},500);
 		}
-
-		
-
 	});
 
 };

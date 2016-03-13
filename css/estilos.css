@@ -1,6 +1,7 @@
 body{
 	/*overflow: hidden;*/
-	background-color: rgba(236, 185, 92, 0.51);
+	background-color: rgb(228,226,226);
+
 }
 
 /**************************HEADER*********************/
@@ -152,7 +153,7 @@ i.inverted.bordered.icon, i.inverted.circular.icon{
 	margin-left: 83%;
 	margin-top: -20%;
 	position: fixed;
-	
+	z-index: 9999;
 }
 .desplegable ul{
 	list-style: none;
@@ -173,10 +174,7 @@ i.inverted.bordered.icon, i.inverted.circular.icon{
 	float: left;
 	margin-top: 10px;
 }
-#logo{
-	margin-top: -15px;
-	margin-left: 5px;
-}
+
 .ui.red.segment:not(.inverted){
 	height: 250px;
 	margin-left: 20%;

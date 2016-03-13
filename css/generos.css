@@ -49,7 +49,7 @@
 	padding: 1%;
 	margin-top: 1%;
 	width: 60%;
-	background: #AFAFAF;
+	
 }
 .cancion2{
 	display: block;
@@ -65,4 +65,14 @@ audio{
 }
 #title{
     margin-left: 35%;
+}
+.ui.grid{
+	width: 100%;
+	margin: 3rem;	
+}
+.ui.piled.segment:after, .ui.piled.segment:before, .ui.piled.segments:after, .ui.piled.segments:before{
+	background-color: transparent;
+}
+.ui.column.grid>[class*="six wide"].column, .ui.grid>.column.row>[class*="six wide"].column, .ui.grid>.row>[class*="six wide"].column, .ui.grid>[class*="six wide"].column{
+	margin-left: 8%;
 }
