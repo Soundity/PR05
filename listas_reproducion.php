@@ -20,8 +20,6 @@ if(isset($_COOKIE['Soundity']))$login = 1;
     	</script>
 	</head>
 	<body>
-
-
 		<?php include('header_menu.html'); ?>
 
 		<div class="general">
@@ -39,8 +37,8 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 						$llistanom = utf8_encode($send['lli_nom']);
 						$idllista = $send['lli_id'];
 						?>
-						<a href="lista.php?idllista=<?php echo $idllista;?>"><?php echo $llistanom;?></a></br>		
-					
+						<a href="lista.php?idllista=<?php echo $idllista;?>"><?php echo $llistanom;?></a> ----		
+						<a href="procs/eliminar_lista.proc.php?idllista=<?php echo $idllista;?>" onClick="return confirm('Seguro que deseas eliminar esta lista de reproducción?')">Eliminar lista</a></br></br>
 						<?php
 					}
 					echo "</div>";
