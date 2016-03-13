@@ -182,9 +182,9 @@ include('conexion.php');
    							<div class="ui piled center aligned segment">
       							<?php
 								echo utf8_encode("<h2>$pro0[mus_titol] </h2>");
-								echo "<div class='cancion' data-source='media/music/$pro0[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$pro1['mus_titol']."   |   Genero: ".$pro1['gen_nom']. " </p></div>";
+								echo "<div class='cancion' data-source='media/music/$pro0[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$pro0['mus_titol']."   |   Genero: ".$pro0['gen_nom']. " </p></div>";
 							
-								echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
+								echo "<h3>Género: </h3><p>$pro0[gen_nom]</p>";
 								echo utf8_encode("<h3>Autor: </h3><p>$pro0[usu_nom]</p>");
 								$valor=$pro0['mus_id'];
 						?>
@@ -201,7 +201,7 @@ include('conexion.php');
 								// POTS VOTAR
 								echo"<i id=$pro0[mus_id] class=' thumbs outline up icon' onclick='suscriM($pro0[mus_id]);'></i>";
 								echo"<i id=$pro0[mus_id] class=' thumbs outline down icon' onclick='suscriN($pro0[mus_id]);'></i>";
-								if ($pro1['totalvots']!=0){
+								if ($pro0['totalvots']!=0){
 									echo $pro0['totalvots']. " Votos";
 								} else {
 									echo "0 Votos";
@@ -222,9 +222,8 @@ include('conexion.php');
 						</div>
 					</div>
 							<?php
-						}
-					
 					}
+				}
 			?>
 		</div>
 		
