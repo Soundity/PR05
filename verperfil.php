@@ -113,7 +113,7 @@ function pasarVariable(cancion){
                         $fichero="media/images/avatares/$perfil[usu_avatar]";
                         echo"</br><img  class='ui small center left circular floated image' src='$fichero'>";
                     }else{
-                        echo"</br><img  src=media/images/avatar.jpg>";
+                        echo"</br><img  class='ui small left circular floated image' src='media/images/avatar.png'>";
                     }
                     echo "<h3 class='ui header'>" . utf8_encode($perfil['usu_descripcio']) . "</h3>";
                     echo "<h4 class='ui header'>" .$totalSuscrip['contador'] ." suscriptores </h4>";
