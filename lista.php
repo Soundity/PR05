@@ -13,7 +13,6 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 		<title>Soundity</title>
 		<link rel="stylesheet" type="text/css" href="css/styleRep1.css">
 		<link rel="stylesheet" type="text/css" href="css/generos.css">
-		<link href="css/generic.css" rel="stylesheet" type="text/css" />
 		<link href="css/listas_reproducion.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     	<script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
@@ -40,7 +39,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 						}
 						?>
 						<article class="cancion" data-source="media/music/<?php echo $send['mus_nom'] ?>">
-							<p><?php echo utf8_encode("Nombre: ".$send['mus_titol']."   |   Genero: ".$send['gen_nom']. "   |    Valoraci髇: "); 
+							<p><?php echo utf8_encode("Nombre: ".$send['mus_titol']."   |   Genero: ".$send['gen_nom']. "   |    Valoraci贸n: "); 
 							$usuari=$_SESSION['id'];
 						$sql2 = "Select * from tbl_valoracio where mus_id=$send[mus_id] AND usu_id=$usuari";
 						//echo $sql2;
@@ -65,7 +64,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 								}
 							}
 						}?>
-						<a href="procs/eliminar_cancion_lista.proc.php?idllista=<?php echo $send['lli_id']?>&lmu_id=<?php echo $send['lmu_id'];?>" onClick="return confirm('Seguro que deseas eliminar esta cancion de la lista de reproducci髇?')">Eliminar cancion de la lista.</a>
+						<a href="procs/eliminar_cancion_lista.proc.php?idllista=<?php echo $send['lli_id']?>&lmu_id=<?php echo $send['lmu_id'];?>" onClick="return confirm('Seguro que deseas eliminar esta cancion de la lista de reproducci贸n?')">Eliminar cancion de la lista.</a>
 						</p>
 						</article>
 					<?php
@@ -75,7 +74,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 					<section id="player" data-autoplay='1' data-loop='1'>
                     <section id="controls">
                         <section id="songTitle">
-                            <span><?php echo utf8_encode("Selecciona una canci髇"); ?></span>
+                            <span><?php echo utf8_encode("Selecciona una canci贸n"); ?></span>
                         </section>
                         <section id="playertrols">
                             <div id="plauseStop">
@@ -102,7 +101,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
                 </section>
                 <?php
 				}else{
-					echo "No hay listas de reproduci髇 creadas.";
+					echo "No hay listas de reproduci贸n creadas.";
 				}	
 			?>
 		</div>
