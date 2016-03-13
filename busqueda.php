@@ -1,8 +1,8 @@
 <?php
 include('conexion.php');
-	$sql0 = "SELECT * FROM tbl_usuari WHERE usu_nom LIKE'%$_REQUEST[buscar]%'";
+	$sql0= "SELECT distinct tbl_usuari.usu_nom, tbl_usuari.usu_avatar, tbl_usuari.usu_id, tbl_musica.mus_titol, tbl_musica.mus_nom FROM tbl_musica INNER JOIN tbl_usuari on tbl_musica.usu_id = tbl_usuari.usu_id WHERE mus_titol LIKE'%$_REQUEST[buscar]%' OR tbl_usuari.usu_nom LIKE'%$_REQUEST[buscar]%' group by tbl_usuari.usu_id";
 	$datos0 = mysqli_query($con, $sql0);
-	$sql1= "SELECT distinct tbl_genere.gen_nom, tbl_genere.gen_id, tbl_usuari.usu_nom, tbl_usuari.usu_id, tbl_musica.mus_titol, tbl_musica.mus_nom, tbl_musica.mus_id, tbl_valoracio.val_id, sum(tbl_valoracio.val_puntuacio) as 'totalvots' FROM tbl_musica INNER JOIN tbl_genere ON tbl_musica.gen_id=tbl_genere.gen_id INNER JOIN tbl_usuari on tbl_musica.usu_id = tbl_usuari.usu_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id WHERE mus_titol LIKE'%$_REQUEST[buscar]%' group by tbl_musica.mus_id";
+	$sql1= "SELECT distinct tbl_genere.gen_nom, tbl_genere.gen_id, tbl_usuari.usu_nom, tbl_usuari.usu_id, tbl_musica.mus_titol, tbl_musica.mus_nom, tbl_musica.mus_id, tbl_valoracio.val_id, sum(tbl_valoracio.val_puntuacio) as 'totalvots' FROM tbl_musica INNER JOIN tbl_genere ON tbl_musica.gen_id=tbl_genere.gen_id INNER JOIN tbl_usuari on tbl_musica.usu_id = tbl_usuari.usu_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id WHERE mus_titol LIKE'%$_REQUEST[buscar]%' OR tbl_usuari.usu_nom LIKE'%$_REQUEST[buscar]%' group by tbl_musica.mus_id";
 	$datos1 = mysqli_query($con, $sql1);
 	session_start();
 if(isset($_SESSION['id']))$login = 1;
@@ -65,6 +65,8 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 		<?php
 			include('header_menu.html');
 			include('autores.php');
+		
+		
 		?>
 		<!-- CADA CANCION -->
 		<div class="ui two column centered grid">
