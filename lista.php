@@ -27,7 +27,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 				include('conexion.php');
 				$user = $_SESSION['id'];
 				$llista = $_REQUEST['idllista'];
-				$sql = "SELECT tbl_musica.mus_id, tbl_musica.mus_nom, tbl_musica.mus_titol, tbl_usuari.usu_nom, tbl_genere.gen_nom, tbl_llistes.lli_nom, totalvots FROM tbl_usuari inner join tbl_llistes on tbl_usuari.usu_id=tbl_llistes.usu_id inner join tbl_llistes_musica on tbl_llistes.lli_id=tbl_llistes_musica.lli_id inner join tbl_musica on tbl_llistes_musica.mus_id=tbl_musica.mus_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id from tbl_valoracio group by mus_id) as queryGen on tbl_musica.mus_id=queryGen.mus_id where tbl_llistes.lli_id=".$llista;
+				$sql = "SELECT tbl_llistes_musica.lmu_id, tbl_llistes_musica.lli_id, tbl_musica.mus_id, tbl_musica.mus_nom, tbl_musica.mus_titol, tbl_usuari.usu_nom, tbl_genere.gen_nom, tbl_llistes.lli_nom, totalvots FROM tbl_usuari inner join tbl_llistes on tbl_usuari.usu_id=tbl_llistes.usu_id inner join tbl_llistes_musica on tbl_llistes.lli_id=tbl_llistes_musica.lli_id inner join tbl_musica on tbl_llistes_musica.mus_id=tbl_musica.mus_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join (Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id from tbl_valoracio group by mus_id) as queryGen on tbl_musica.mus_id=queryGen.mus_id where tbl_llistes.lli_id=".$llista;
 				$datos = mysqli_query ($con, $sql);
 				if(mysqli_num_rows($datos)>0){
 					$llistanom="hola";
@@ -64,7 +64,13 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 									
 								}
 							}
-						}?></p>
+						}
+
+						?>
+						
+						<a href="procs/eliminar_cancion_lista.proc.php?lmu_id=<?php echo $send['lmu_id'];?>&idllista=<?php echo $send['lli_id'];?>" onClick="return confirm('Confirma para eliminar')"> | Eliminar de la lista.</a>
+					
+					</p>
 						</article>
 					<?php
 					}
