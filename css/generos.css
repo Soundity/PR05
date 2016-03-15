@@ -76,3 +76,7 @@ audio{
 .ui.column.grid>[class*="six wide"].column, .ui.grid>.column.row>[class*="six wide"].column, .ui.grid>.row>[class*="six wide"].column, .ui.grid>[class*="six wide"].column{
 	margin-left: 8%;
 }
+#parche{
+	margin-left: 35%;
+	
+}

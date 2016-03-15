@@ -41,7 +41,6 @@
             }
             return xmlhttp;
         }
-
         function suscri(idsub){
             ajax=objetoAjax();
             ajax.open("POST", "procs/subscripciones.proc.php",true);
@@ -57,11 +56,9 @@
             ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             ajax.send("idsub="+idsub);
         }
-
         function pasarVariable(cancion){
             document.getElementById("buscarBD").value=cancion;
         }
-
         function listaBD(id){
             var lli_id=document.getElementById("listaFORM").value;
             var mus_id=document.getElementById("buscarBD").value;
@@ -71,7 +68,6 @@
             ajax.open("POST", "procs/AmusLista.proc.php?lli_id="+lli_id+"&mus_id="+mus_id,true);
             ajax.onreadystatechange=function() {
                 if (ajax.readyState==4) {
-
                 }
             }
             ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -117,7 +113,96 @@
                                     echo "<h4 class='ui header'>" .$totalSuscrip['contador'] ." suscriptores </h4>";
                         ?>
                         <!-- ######################################################################## -->
-                        <!-- MODALBOX AÑADIR A LISTA -->
+                       
+                        <?php
+                            $contador=$contador+1;
+                        }
+                        echo "</br>";
+                        
+                        ?>
+                    </div>
+                </div>
+            </div>
+                    <!-- ######################################################################## -->
+                    <!-- CADA CANCIÓN -->
+                    <div class="ui grid" id="parche">
+                        <div class="three wide column">
+                            <div class="ui raised center aligned segment">
+                                <?php
+                                if(isset($perfil['mus_titol'])){
+                                echo utf8_encode("<h2>$perfil[mus_titol] </h2>");
+                                echo "<div class='cancion' data-source='media/music/$perfil[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$perfil['mus_titol']."</p></div>";
+                                echo utf8_encode("<h3>Autor: </h3><p>$perfil[usu_nom]</p>");
+                                $valor=$perfil['mus_id'];
+                        ?>
+                            <h3><a href='#lista' onclick="pasarVariable(<?php echo $valor; ?>);">Añadir a mi lista</a></h3>
+                
+                        <?php
+                            /*echo "<h3>Valoración: </h3><div class='ui label'>";
+                            $usuari=$_SESSION['id'];
+                            $sql2 = "Select * from tbl_valoracio where mus_id=$perfil[mus_id] & usu_id=$usuari";
+                            //echo $sql2;
+                            $datos2 = mysqli_query($con, $sql2);
+                            if(mysqli_num_rows($datos2)==0){
+                                // POTS VOTAR
+                                echo"<i id=$perfil[mus_id] class=' thumbs outline up icon' onclick='suscriM($perfil[mus_id]);'></i>";
+                                echo"<i id=$perfil[mus_id] class=' thumbs outline down icon' onclick='suscriN($perfil[mus_id]);'></i>";
+                                if ($perfil['totalvots']!=0){
+                                    echo $perfil['totalvots']. " Votos";
+                                } else {
+                                    echo "0 Votos";
+                                }
+                            }else{
+                                // JA HAS VOTAR 
+                                while($pro2 = mysqli_fetch_array($datos2)) {    
+                                    if ($pro2['val_puntuacio']==1){
+                                        echo"<i id=$perfil[mus_id] class=' thumbs outline down icon' onclick='suscriN($perfil[mus_id]);'></i>$perfil[totalvots] Te Gusta ";
+                                    } else {
+                                        echo"<i id=$perfil[mus_id] class=' thumbs outline up icon' onclick='suscriM($perfil[mus_id]);'></i>$perfil[totalvots] Ya no te gusta ";
+                                        
+                                    }
+                                }
+                            }*/
+                        }
+                    }
+                            ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ######################################################################## -->
+                    <!-- REPRODUCTOR -->
+                    <section id="player" data-autoplay='1' data-loop='1'>
+                        <section id="controls">
+                            <section id="songTitle">
+                                <span>Selecciona una canción</span>
+                            </section>
+                            <section id="playertrols">
+                                <div id="plauseStop">
+                                    <div id="plause"><i id="playPause" class="play icon"></i></div>
+                                    <div id="stop"><i class="stop icon"></i></div>
+                                </div>
+                                <div id="progressBar">
+                                    <div id="timeLoaded"></div>
+                                    <div id="timePlayed"></div>
+                                </div>
+                            </section>
+                            <section id="volumeTime">
+                                <input type="range" min="0" max="1" step="0.1" value="0.5" />
+                                <div id="timeStatus">
+                                    <time id="played">00:00</time>
+                                    <span>/</span>
+                                    <time id="totalTime">00:00</time>
+                                </div>
+                            </section>
+                        </section>
+                    </section>
+                    <!-- ######################################################################## -->
+                    <footer></footer>
+                </div>
+            </div>
+        
+         <!-- MODALBOX AÑADIR A LISTA -->
                         <div id="lista" class="modalmask">
                             <div class="modalbox movedown" id="resultadoContent">
                                 <?php
@@ -162,89 +247,6 @@
                             </div>
                         </div>
                         <!-- ######################################################################## -->
-                        <?php
-                            $contador=$contador+1;
-                        }
-                        echo "</br>";
-                        if(isset($perfil['mus_titol'])){
-                        ?>
-                    </div>
-                    <!-- ######################################################################## -->
-                    <!-- CADA CANCIÓN -->
-                    <div class="three wide column">
-                            <div class="ui raised center aligned segment">
-                                <?php
-                                echo utf8_encode("<h2>$perfil[mus_titol] </h2>");
-                                echo "<div class='cancion' data-source='media/music/$perfil[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$perfil['mus_titol']."</p></div>";
-                                echo utf8_encode("<h3>Autor: </h3><p>$perfil[usu_nom]</p>");
-                                $valor=$perfil['mus_id'];
-                        ?>
-                            <h3><a href='#lista' onclick="pasarVariable(<?php echo $valor; ?>);">Añadir a mi lista</a></h3>
-                
-        <?php
-
-                            /*echo "<h3>Valoración: </h3><div class='ui label'>";
-                            $usuari=$_SESSION['id'];
-                            $sql2 = "Select * from tbl_valoracio where mus_id=$perfil[mus_id] & usu_id=$usuari";
-                            //echo $sql2;
-                            $datos2 = mysqli_query($con, $sql2);
-                            if(mysqli_num_rows($datos2)==0){
-                                // POTS VOTAR
-                                echo"<i id=$perfil[mus_id] class=' thumbs outline up icon' onclick='suscriM($perfil[mus_id]);'></i>";
-                                echo"<i id=$perfil[mus_id] class=' thumbs outline down icon' onclick='suscriN($perfil[mus_id]);'></i>";
-                                if ($perfil['totalvots']!=0){
-                                    echo $perfil['totalvots']. " Votos";
-                                } else {
-                                    echo "0 Votos";
-                                }
-                            }else{
-                                // JA HAS VOTAR 
-                                while($pro2 = mysqli_fetch_array($datos2)) {    
-                                    if ($pro2['val_puntuacio']==1){
-                                        echo"<i id=$perfil[mus_id] class=' thumbs outline down icon' onclick='suscriN($perfil[mus_id]);'></i>$perfil[totalvots] Te Gusta ";
-                                    } else {
-                                        echo"<i id=$perfil[mus_id] class=' thumbs outline up icon' onclick='suscriM($perfil[mus_id]);'></i>$perfil[totalvots] Ya no te gusta ";
-                                        
-                                    }
-                                }
-                            }*/
-                        }
-                    }
-                            ?>
-                            </div>
-                        </div>
-                    <!-- ######################################################################## -->
-                    <!-- REPRODUCTOR -->
-                    <section id="player" data-autoplay='1' data-loop='1'>
-                        <section id="controls">
-                            <section id="songTitle">
-                                <span>Selecciona una canción</span>
-                            </section>
-                            <section id="playertrols">
-                                <div id="plauseStop">
-                                    <div id="plause"><i id="playPause" class="play icon"></i></div>
-                                    <div id="stop"><i class="stop icon"></i></div>
-                                </div>
-                                <div id="progressBar">
-                                    <div id="timeLoaded"></div>
-                                    <div id="timePlayed"></div>
-                                </div>
-                            </section>
-                            <section id="volumeTime">
-                                <input type="range" min="0" max="1" step="0.1" value="0.5" />
-                                <div id="timeStatus">
-                                    <time id="played">00:00</time>
-                                    <span>/</span>
-                                    <time id="totalTime">00:00</time>
-                                </div>
-                            </section>
-                        </section>
-                    </section>
-                    <!-- ######################################################################## -->
-                    <footer></footer>
-                </div>
-            </div>
-        </div>
     </body>
 </html>
 
@@ -293,7 +295,6 @@
                 
                 echo "<h3 class='ui header'>" . utf8_encode($perfil['usu_descripcio']) . "</h3>";
                  echo "<h4 class='ui header'>" .$totalSuscrip['contador'] ." suscriptores </h4>";
-
         ?>
     
     <?php
