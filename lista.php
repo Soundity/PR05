@@ -23,6 +23,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 	<body>
 	<?php include('header_menu.html'); ?>
 		<div class="general">
+			
 			<?php
 				include('conexion.php');
 				$user = $_SESSION['id'];
@@ -31,6 +32,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 				$datos = mysqli_query ($con, $sql);
 				if(mysqli_num_rows($datos)>0){
 					$llistanom="hola";
+					echo "<div class='ui raised very centered padded text container segment'>";
 					echo "<div id='tracks' class='list'>";
 					
 					while ($send = mysqli_fetch_array($datos)){
@@ -39,8 +41,10 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 							echo "<h1 id='title'>".$llistanom."</h1>";
 						}
 						?>
-						<article class="cancion" data-source="media/music/<?php echo $send['mus_nom'] ?>">
-							<p><?php echo utf8_encode("Nombre: ".$send['mus_titol']."   |   Genero: ".$send['gen_nom']. "   |    Valoración: "); 
+						<?php
+						echo "<div class='cancion' data-source='media/music/$send[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$send['mus_titol']."   |   Genero: ".$send['gen_nom']. " </p></div>";
+						?>
+							<?php echo utf8_encode("Nombre: ".$send['mus_titol']."   |   Genero: ".$send['gen_nom']. "   |    Valoración: "); 
 							$usuari=$_SESSION['id'];
 						$sql2 = "Select * from tbl_valoracio where mus_id=$send[mus_id] AND usu_id=$usuari";
 						//echo $sql2;
@@ -74,7 +78,8 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 						</article>
 					<?php
 					}
-					echo "</div>";
+					echo "</div></div>";
+
 					?>
 					<section id="player" data-autoplay='1' data-loop='1'>
                     <section id="controls">
@@ -106,11 +111,21 @@ if(isset($_COOKIE['Soundity']))$login = 1;
                 </section>
                 <?php
 				}else{
-					echo "No hay listas de reprodución creadas.";
+					?>
+					<div class="general">
+					<div class="ui raised very centered padded text container segment">
+			<?php
+					echo utf8_encode("No hay canciones en esta lista");
+					?>
+				</div>
+			</div>
+			<?php
+
 				}	
 			?>
 		</div>
     </div>
+    <footer></footer>
 	</body>
 </html>
 <?php
