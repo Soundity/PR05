@@ -79,8 +79,8 @@
 								$datos2 = mysqli_query($con, $sql2);
 								if(mysqli_num_rows($datos2)==0){
 									// POTS VOTAR
-									echo"<i id=$cancion[mus_id] class=' thumbs outline up icon' onclick='suscriM($cancion[mus_id]);'></i>";
-									echo"<i id=$cancion[mus_id] class=' thumbs outline down icon' onclick='suscriN($cancion[mus_id]);'></i>";
+									echo"<i id=$cancion[mus_id] class='large thumbs outline up icon' onclick='suscriM($cancion[mus_id]);'></i>";
+									echo"<i id=$cancion[mus_id] class='large thumbs outline down icon' onclick='suscriN($cancion[mus_id]);'></i>";
 									if ($cancion['totalvots']!=0){
 										echo $cancion['totalvots']. " Votos";
 									} else {
@@ -90,9 +90,9 @@
 									// JA HAS VOTAT 
 									while($pro2 = mysqli_fetch_array($datos2)) {	
 										if ($pro2['val_puntuacio']==1){
-											echo"<i id=$cancion[mus_id] class=' thumbs outline down icon' onclick='suscriN($cancion[mus_id]);'></i>$cancion[totalvots] Te Gusta ";
+											echo"<i id=$cancion[mus_id] class='large thumbs outline down icon' onclick='suscriN($cancion[mus_id]);'></i>$cancion[totalvots] Te Gusta ";
 										} else {
-											echo"<i id=$cancion[mus_id] class=' thumbs outline up icon' onclick='suscriM($cancion[mus_id]);'></i>$cancion[totalvots] Ya no te gusta ";
+											echo"<i id=$cancion[mus_id] class='large thumbs outline up icon' onclick='suscriM($cancion[mus_id]);'></i>$cancion[totalvots] Ya no te gusta ";
 										}
 									}
 								}?>

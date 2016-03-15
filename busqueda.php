@@ -156,8 +156,8 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 				$datos2 = mysqli_query($con, $sql2);
 				if(mysqli_num_rows($datos2)==0){
 					// POTS VOTAR
-					echo"<i id=$pro1[mus_id] class=' thumbs outline up icon' onclick='suscriM($pro1[mus_id]);'></i>";
-					echo"<i id=$pro1[mus_id] class=' thumbs outline down icon' onclick='suscriN($pro1[mus_id]);'></i>";
+					echo"<i id=$pro1[mus_id] class='large thumbs outline up icon' onclick='suscriM($pro1[mus_id]);'></i>";
+					echo"<i id=$pro1[mus_id] class='large thumbs outline down icon' onclick='suscriN($pro1[mus_id]);'></i>";
 					if ($pro1['totalvots']!=0){
 						echo $pro1['totalvots']. " Votos";
 					} else {
@@ -167,9 +167,9 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 					// JA HAS VOTAR 
 					while($pro2 = mysqli_fetch_array($datos2)) {
 						if ($pro2['val_puntuacio']==1){
-							echo"<i id=$pro1[mus_id] class=' thumbs outline down icon' onclick='suscriN($pro1[mus_id]);'></i>$pro1[totalvots] Te Gusta ";
+							echo"<i id=$pro1[mus_id] class='large thumbs outline down icon' onclick='suscriN($pro1[mus_id]);'></i>$pro1[totalvots] Te Gusta ";
 						} else {
-							echo"<i id=$pro1[mus_id] class=' thumbs outline up icon' onclick='suscriM($pro1[mus_id]);'></i>$pro1[totalvots] Ya no te gusta ";
+							echo"<i id=$pro1[mus_id] class='large thumbs outline up icon' onclick='suscriM($pro1[mus_id]);'></i>$pro1[totalvots] Ya no te gusta ";
 						}
 					}
 				}
