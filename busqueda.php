@@ -206,6 +206,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 				</section>
 			</section>
 		</section>
+		<footer></footer>
 	</body>
 </html>
 <?php

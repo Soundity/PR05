@@ -61,6 +61,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 						</form>
 					</div>	
     </div>
+    <footer></footer>
 	</body>
 </html>
 <?php
