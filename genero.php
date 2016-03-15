@@ -41,8 +41,6 @@
 			function listaBD(id){
 				var lli_id=document.getElementById("listaFORM").value;
 				var mus_id=document.getElementById("buscar").value;
-					alert(lli_id);
-					alert(mus_id);
 					ajax=objetoAjax();
 					ajax.open("POST", "procs/AmusLista.proc.php?lli_id="+lli_id+"&mus_id="+mus_id,true);
 					ajax.onreadystatechange=function() {
@@ -114,6 +112,8 @@
 						<!-- Seleccionar lista -->
 						<form name="lista" action="#">
 							<label><input id="buscar" name="buscar" type="hidden" value="" /></label>
+							<label><input id="gen" name="gen" type="hidden" value="<?php echo $_REQUEST['gen'];?>" /></label>
+							<label><input id="genNom" name="genNom" type="hidden" value="<?php echo $_REQUEST['genNom'];?>" /></label>
 							<a href="#close" class="boxclose"><img src="media/images/close.png" alt=""></a>
 							<h2 >Selecciona una lista</h2>
 							<?php
