@@ -151,7 +151,7 @@ if(isset($_COOKIE['Soundity']))$login = 1;
 				echo "<h3>Valoración: </h3>";
 				echo "<div class='ui label'>";
 				$usuari=$_SESSION['id'];
-				$sql2 = "Select * from tbl_valoracio where mus_id=$pro1[mus_id] & usu_id=$usuari";
+				$sql2 = "Select * from tbl_valoracio where mus_id=$pro1[mus_id] AND usu_id=$usuari";
 				//echo $sql2;
 				$datos2 = mysqli_query($con, $sql2);
 				if(mysqli_num_rows($datos2)==0){
