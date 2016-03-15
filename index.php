@@ -194,7 +194,7 @@ include('conexion.php');
 
 							echo "<h3>Valoración: </h3><div class='ui label'>";
 							$usuari=$_SESSION['id'];
-							$sql2 = "Select * from tbl_valoracio where mus_id=$pro0[mus_id] & usu_id=$usuari";
+							$sql2 = "Select * from tbl_valoracio where mus_id=$pro0[mus_id] AND usu_id=$usuari";
 							//echo $sql2;
 							$datos2 = mysqli_query($con, $sql2);
 							if(mysqli_num_rows($datos2)==0){
