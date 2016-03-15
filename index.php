@@ -85,7 +85,7 @@ include('conexion.php');
 	<!-- CODI HTML DEL TOP 5-->
 		<div id="Top5">
 			<?php
-				$sql1 = "Select distinct tbl_genere.gen_nom, tbl_usuari.usu_nom, tbl_musica.mus_titol, tbl_musica.mus_nom, tbl_valoracio.mus_id, COUNT(tbl_valoracio.val_puntuacio) as 'totalvots' From tbl_musica inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id where tbl_valoracio.val_puntuacio=1 group by tbl_valoracio.mus_id order by totalvots desc limit 5";
+				$sql1 = "Select distinct tbl_genere.gen_nom, tbl_usuari.usu_nom, tbl_musica.mus_titol, tbl_musica.mus_nom, tbl_valoracio.mus_id, COUNT(tbl_valoracio.val_puntuacio) as 'totalvots' From tbl_musica inner join tbl_usuari on tbl_musica.usu_id=tbl_usuari.usu_id inner join tbl_genere on tbl_musica.gen_id=tbl_genere.gen_id left join tbl_valoracio on tbl_musica.mus_id=tbl_valoracio.mus_id where tbl_valoracio.val_puntuacio=1 group by tbl_valoracio.mus_id limit 5";
 				$datos1 = mysqli_query($con, $sql1);
 				if(mysqli_num_rows($datos1)<=0){
 					echo "<div class='seven wide centered column'>";
@@ -182,9 +182,9 @@ include('conexion.php');
    							<div class="ui piled center aligned segment">
       							<?php
 								echo utf8_encode("<h2>$pro0[mus_titol] </h2>");
-								echo "<div class='cancion' data-source='media/music/$pro0[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$pro0['mus_titol']."   |   Genero: ".$pro0['gen_nom']. " </p></div>";
+								echo "<div class='cancion' data-source='media/music/$pro0[mus_nom]'><i class='play icon' ></i><p style='display:none'>Nombre: ".$pro1['mus_titol']."   |   Genero: ".$pro1['gen_nom']. " </p></div>";
 							
-								echo "<h3>Género: </h3><p>$pro0[gen_nom]</p>";
+								echo "<h3>Género: </h3><p>$pro1[gen_nom]</p>";
 								echo utf8_encode("<h3>Autor: </h3><p>$pro0[usu_nom]</p>");
 								$valor=$pro0['mus_id'];
 						?>
@@ -201,7 +201,7 @@ include('conexion.php');
 								// POTS VOTAR
 								echo"<i id=$pro0[mus_id] class=' thumbs outline up icon' onclick='suscriM($pro0[mus_id]);'></i>";
 								echo"<i id=$pro0[mus_id] class=' thumbs outline down icon' onclick='suscriN($pro0[mus_id]);'></i>";
-								if ($pro0['totalvots']!=0){
+								if ($pro1['totalvots']!=0){
 									echo $pro0['totalvots']. " Votos";
 								} else {
 									echo "0 Votos";
@@ -210,7 +210,7 @@ include('conexion.php');
 								// JA HAS VOTAR 
 								while($pro2 = mysqli_fetch_array($datos2)) {	
 									if ($pro2['val_puntuacio']==1){
-										echo"<i id=$pro0[mus_id] class=' thumbs outline down icon' onclick='suscriN($pro0[mus_id]);'></i>$pro0[totalvots] Te Gusta ";
+										echo"<i id=$pro0[mus_id] class=' thumbs outline down icon' onclick='suscriN($pro1[mus_id]);'></i>$pro0[totalvots] Te Gusta ";
 									} else {
 										echo"<i id=$pro0[mus_id] class=' thumbs outline up icon' onclick='suscriM($pro0[mus_id]);'></i>$pro0[totalvots] Ya no te gusta ";
 										
@@ -222,8 +222,9 @@ include('conexion.php');
 						</div>
 					</div>
 							<?php
+						}
+					
 					}
-				}
 			?>
 		</div>
 		
