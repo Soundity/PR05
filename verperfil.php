@@ -138,31 +138,37 @@
                             <h3><a href='#lista' onclick="pasarVariable(<?php echo $valor; ?>);">Añadir a mi lista</a></h3>
                 
                         <?php
-                            /*echo "<h3>Valoración: </h3><div class='ui label'>";
+                            echo "<h3>Valoración: </h3><div class='ui label'>";
                             $usuari=$_SESSION['id'];
-                            $sql2 = "Select * from tbl_valoracio where mus_id=$perfil[mus_id] & usu_id=$usuari";
-                            //echo $sql2;
-                            $datos2 = mysqli_query($con, $sql2);
-                            if(mysqli_num_rows($datos2)==0){
-                                // POTS VOTAR
-                                echo"<i id=$perfil[mus_id] class=' thumbs outline up icon' onclick='suscriM($perfil[mus_id]);'></i>";
-                                echo"<i id=$perfil[mus_id] class=' thumbs outline down icon' onclick='suscriN($perfil[mus_id]);'></i>";
-                                if ($perfil['totalvots']!=0){
-                                    echo $perfil['totalvots']. " Votos";
-                                } else {
-                                    echo "0 Votos";
-                                }
-                            }else{
-                                // JA HAS VOTAR 
-                                while($pro2 = mysqli_fetch_array($datos2)) {    
-                                    if ($pro2['val_puntuacio']==1){
-                                        echo"<i id=$perfil[mus_id] class=' thumbs outline down icon' onclick='suscriN($perfil[mus_id]);'></i>$perfil[totalvots] Te Gusta ";
-                                    } else {
-                                        echo"<i id=$perfil[mus_id] class=' thumbs outline up icon' onclick='suscriM($perfil[mus_id]);'></i>$perfil[totalvots] Ya no te gusta ";
-                                        
-                                    }
-                                }
-                            }*/
+							$sqlval ="Select sum(tbl_valoracio.val_puntuacio) as totalvots, mus_id from tbl_valoracio where mus_id=".$perfil['mus_id'];
+							$datosval = mysqli_query($con, $sqlval);
+							if(mysqli_num_rows($datosval)==1){
+								while($proval = mysqli_fetch_array($datosval)) { 
+									$sql2 = "Select * from tbl_valoracio where mus_id=$perfil[mus_id] and usu_id=$usuari";
+									//echo $sql2;
+									$datos2 = mysqli_query($con, $sql2);
+									if(mysqli_num_rows($datos2)==0){
+										// POTS VOTAR
+										echo"<i id=$perfil[mus_id] class=' thumbs outline up icon' onclick='suscriM($perfil[mus_id]);'></i>";
+										echo"<i id=$perfil[mus_id] class=' thumbs outline down icon' onclick='suscriN($perfil[mus_id]);'></i>";
+										if ($proval['totalvots']!=0){
+											echo $proval['totalvots']. " Votos";
+										} else {
+											echo "0 Votos";
+										}
+									}else{
+										// JA HAS VOTAR 
+										while($pro2 = mysqli_fetch_array($datos2)) {    
+											if ($pro2['val_puntuacio']==1){
+												echo"<i id=$perfil[mus_id] class=' thumbs outline down icon' onclick='suscriN($perfil[mus_id]);'></i>$proval[totalvots] Te Gusta ";
+											} else {
+												echo"<i id=$perfil[mus_id] class=' thumbs outline up icon' onclick='suscriM($perfil[mus_id]);'></i>$proval[totalvots] Ya no te gusta ";
+												
+											}
+										}
+									}
+								}
+							}		
                         }
                     }
                             ?>
